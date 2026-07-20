@@ -160,6 +160,14 @@ addTest("Landing & Initialization", "test_password_input_visible", "Verify passw
   if (!passInput) throw new Error("Password field is missing.");
 });
 
+addTest("Landing & Initialization", "test_password_placeholder_check", "Verify password input field has password dot placeholder.", async (driver) => {
+  const passInput = await findElementWithTimeout(driver, By.name('password'));
+  const placeholder = await passInput.getAttribute('placeholder');
+  if (placeholder !== '••••••') {
+    throw new Error(`Expected placeholder to be '••••••' but got '${placeholder}'`);
+  }
+});
+
 addTest("Landing & Initialization", "test_eye_icon_toggles_password_visibility", "Verify eye icon toggles input type between password and text.", async (driver) => {
   const passInput = await findElementWithTimeout(driver, By.name('password'));
   const toggleBtn = await findElementWithTimeout(driver, By.css('button[type="button"] > svg.lucide-eye'));

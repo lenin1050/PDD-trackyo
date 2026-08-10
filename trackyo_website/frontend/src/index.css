@@ -127,8 +127,12 @@ body {
   color: var(--text-primary);
   border-radius: 0.5rem;
   padding: 0.625rem 1rem;
+  height: 2.75rem;
+  line-height: 1.5;
   outline: none;
-  transition: all 0.2s;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .theme-input:focus {

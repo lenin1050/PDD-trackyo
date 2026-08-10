@@ -1,0 +1,108 @@
+name: Load Test (k6)
+
+on:
+  workflow_dispatch:
+    inputs:
+      vus:
+        description: 'Number of Virtual Users'
+        required: false
+        default: '100'
+      duration:
+        description: 'Test duration (e.g. 1m, 2m, 30s)'
+        required: false
+        default: '1m'
+      target_url:
+        description: 'API base URL to load test'
+        required: false
+        default: 'https://trackyo-api.onrender.com'
+  schedule:
+    - cron: '0 3 * * 0'   # Every Sunday 3AM UTC (weekly baseline)
+
+permissions:
+  contents: write
+
+jobs:
+  load-test:
+    name: k6 Load Test — ${{ github.event.inputs.vus || '100' }} VUs × ${{ github.event.inputs.duration || '1m' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install k6
+        run: |
+          curl -s https://dl.k6.io/key.gpg | sudo apt-key add -
+          echo "deb https://dl.k6.io/deb stable main" | sudo tee /etc/apt/sources.list.d/k6.list
+          sudo apt-get update -q
+          sudo apt-get install -q k6
+
+      - name: Run k6 Load Test
+        env:
+          TRACKYO_API_URL: ${{ github.event.inputs.target_url || 'https://trackyo-api.onrender.com' }}
+          K6_VUS: ${{ github.event.inputs.vus || '100' }}
+          K6_DURATION: ${{ github.event.inputs.duration || '1m' }}
+        run: |
+          mkdir -p "load-test-results"
+          k6 run \
+            --vus "$K6_VUS" \
+            --duration "$K6_DURATION" \
+            --env TRACKYO_API_URL="$TRACKYO_API_URL" \
+            --out json=load-test-results/raw-results.json \
+            load-tests/trackyo-load-test.js \
+            2>&1 | tee load-test-results/k6-output.txt || true
+
+      - name: Generate Load Test Summary
+        if: always()
+        run: |
+          REPORT_FILE="load-test-results/load-test-report-$(date -u +%Y%m%d-%H%M).md"
+          {
+            echo "# Trackyo Load Test Report"
+            echo ""
+            echo "**Build:** ${{ github.run_number }}"
+            echo "**Date:** $(date -u '+%Y-%m-%d %H:%M UTC')"
+            echo "**VUs:** ${{ github.event.inputs.vus || '100' }}"
+            echo "**Duration:** ${{ github.event.inputs.duration || '1m' }}"
+            echo "**Target URL:** ${{ github.event.inputs.target_url || 'https://trackyo-api.onrender.com' }}"
+            echo ""
+            echo "## Results"
+            echo "\`\`\`"
+            cat load-test-results/k6-output.txt 2>/dev/null || echo "No output"
+            echo "\`\`\`"
+          } > "$REPORT_FILE"
+          cp "$REPORT_FILE" "load-test-results/latest.md"
+
+      - name: Upload Load Test Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Load-Test-Reports-${{ github.run_number }}
+          path: load-test-results/
+
+      - name: Commit Load Test Results
+        if: github.ref == 'refs/heads/main'
+        run: |
+          git config --global user.name  "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add load-test-results/ || true
+          git diff --staged --quiet || git commit -m "ci: add load test results [build ${{ github.run_number }}]"
+          git push || true
+        continue-on-error: true
+
+      - name: Publish Step Summary
+        if: always()
+        run: |
+          echo "# ⚡ Load Test Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Parameter | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|---|---|" >> $GITHUB_STEP_SUMMARY
+          echo "| VUs | ${{ github.event.inputs.vus || '100' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Duration | ${{ github.event.inputs.duration || '1m' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Target | ${{ github.event.inputs.target_url || 'https://trackyo-api.onrender.com' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📎 Full k6 output in workflow artifacts." >> $GITHUB_STEP_SUMMARY
+          if grep -q "✓" load-test-results/k6-output.txt 2>/dev/null; then
+            echo "✅ All thresholds passed." >> $GITHUB_STEP_SUMMARY
+          elif grep -q "✗" load-test-results/k6-output.txt 2>/dev/null; then
+            echo "❌ Some thresholds failed — check artifacts." >> $GITHUB_STEP_SUMMARY
+          fi

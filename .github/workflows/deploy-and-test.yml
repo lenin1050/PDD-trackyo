@@ -18,7 +18,7 @@ concurrency:
 
 jobs:
   build-test-deploy:
-    name: Build, Run E2E, and Deploy
+    name: Build, Run E2E (300 cases), and Deploy
     runs-on: ubuntu-latest
 
     steps:
@@ -30,10 +30,10 @@ jobs:
         with:
           node-version: 18
 
-      # 1. Install & build frontend
+      # ── 1. Install & Build Frontend ─────────────────────────────
       - name: Install Frontend Dependencies
         working-directory: ./trackyo_website/frontend
-        run: npm install
+        run: npm install --legacy-peer-deps
 
       - name: Build Frontend
         working-directory: ./trackyo_website/frontend
@@ -42,86 +42,141 @@ jobs:
           VITE_API_URL: https://trackyo-api.onrender.com/api
         run: npm run build
 
-      # 2. Stage frontend build
+      # ── 2. Stage Frontend Build ─────────────────────────────────
       - name: Stage Frontend Build
         run: |
           mkdir -p pages_build
           cp -r trackyo_website/frontend/dist/* pages_build/
 
-      # 3. Setup backend dependencies and MongoDB memory server
-      - name: Install Backend & Test Dependencies
+      # ── 3. Install Backend & Selenium Dependencies ──────────────
+      - name: Install Backend Dependencies
         working-directory: ./trackyo_website/backend
-        run: |
-          npm install
-          npm install --prefix selenium-tests
+        run: npm install
 
-      # 4. Start backend and run Selenium tests (Headless mode)
-      - name: Run Selenium E2E Tests
+      - name: Install Selenium Test Dependencies
+        working-directory: ./trackyo_website/backend/selenium-tests
+        run: npm install
+
+      # ── 4. Install ChromeDriver ─────────────────────────────────
+      - name: Install ChromeDriver
+        run: |
+          CHROME_VERSION=$(google-chrome --version | grep -oP '\d+' | head -1)
+          echo "Chrome version: $CHROME_VERSION"
+          npm install -g chromedriver || true
+
+      # ── 5. Run 300 Selenium E2E Tests ───────────────────────────
+      - name: Run Selenium E2E Tests (300 cases)
         working-directory: ./trackyo_website/backend/selenium-tests
         env:
           CI: true
           BASE_URL: http://localhost:5173/
+          DISPLAY: ':99'
         run: |
-          # The runner will start its own local instances to verify app functionality
+          # Start virtual display for headless Chrome
+          Xvfb :99 -screen 0 1280x800x24 &
+          XVFB_PID=$!
+          echo "Xvfb started with PID $XVFB_PID"
+          sleep 2
+
+          # Run the test suite (300 cases)
           node run-tests.js || true
 
-      # 5. Populate reports into pages_build structure
+          # Stop virtual display
+          kill $XVFB_PID 2>/dev/null || true
+
+      # ── 6. Stage Test Reports ───────────────────────────────────
       - name: Stage Test Reports
+        if: always()
         run: |
-          # Define folders
           LATEST_DIR="pages_build/reports/latest"
           HISTORY_DIR="pages_build/reports/history/build-${{ github.run_number }}"
-          
+
           mkdir -p "$LATEST_DIR"
           mkdir -p "$HISTORY_DIR"
-          
-          # Copy to latest
-          if [ -d "Test Results/HTML" ]; then
-            cp -r Test Results/HTML/* "$LATEST_DIR"/ || true
-          fi
-          if [ -d "Test Results/Summary" ]; then
-            cp -r Test Results/Summary/* "$LATEST_DIR"/ || true
-          fi
-          if [ -d "Test Results/Screenshots" ]; then
-            cp -r Test Results/Screenshots "$LATEST_DIR"/ || true
-          fi
-          if [ -d "Test Results/Logs" ]; then
-            cp -r Test Results/Logs "$LATEST_DIR"/ || true
-          fi
-          
-          # Copy to history
-          cp -r "$LATEST_DIR"/* "$HISTORY_DIR"/ || true
 
-      # 6. Setup Pages
+          # Copy HTML/Summary/Screenshots/Logs to latest
+          for folder in "HTML" "Summary" "Screenshots" "Logs" "Excel"; do
+            if [ -d "Test Results/$folder" ]; then
+              cp -r "Test Results/$folder"/* "$LATEST_DIR/" 2>/dev/null || true
+            fi
+          done
+
+          # Copy to history
+          cp -r "$LATEST_DIR"/* "$HISTORY_DIR/" 2>/dev/null || true
+
+          # Generate simple index page for reports
+          cat > "$LATEST_DIR/index.html" <<EOF
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <meta charset="UTF-8">
+            <title>Trackyo Test Reports</title>
+            <style>
+              body { font-family: sans-serif; background: #0f172a; color: #e2e8f0; padding: 20px; }
+              a { color: #38bdf8; }
+              h1 { color: #38bdf8; }
+              ul { line-height: 2; }
+            </style>
+          </head>
+          <body>
+            <h1>Trackyo Test Reports — Build #${{ github.run_number }}</h1>
+            <ul>
+              <li><a href="execution-report.html">E2E Execution Report (HTML)</a></li>
+              <li><a href="summary.md">Test Summary (Markdown)</a></li>
+              <li><a href="execution-log.log">Execution Log</a></li>
+            </ul>
+            <p><em>Generated: $(date -u '+%Y-%m-%d %H:%M UTC')</em></p>
+          </body>
+          </html>
+          EOF
+
+      # ── 7. Commit Test Reports ──────────────────────────────────
+      - name: Commit Test Reports to Repo
+        if: always() && github.ref == 'refs/heads/main'
+        run: |
+          git config --global user.name  "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add "Test Results/" 2>/dev/null || true
+          git diff --staged --quiet || git commit -m "ci: update E2E test reports [build ${{ github.run_number }}]"
+          git push || true
+        continue-on-error: true
+
+      # ── 8. Setup GitHub Pages ────────────────────────────────────
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v4
 
-      # 7. Upload the pages_build folder as artifact
+      # ── 9. Upload Pages Artifact ─────────────────────────────────
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: pages_build
 
-      # 8. Deploy the unified site (app + reports) to GitHub Pages
+      # ── 10. Deploy to GitHub Pages ───────────────────────────────
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
 
-      # 9. Upload test reports as separate archive artifacts
+      # ── 11. Upload Test Reports Archive ─────────────────────────
       - name: Upload Test Reports Archive
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: E2E-Automation-Reports
+          name: E2E-Automation-Reports-${{ github.run_number }}
           path: Test Results/
 
-      # 10. Publish GitHub Step Summary
+      # ── 12. Step Summary ─────────────────────────────────────────
       - name: Publish Step Summary
         if: always()
         run: |
-          echo "# Live GitHub Pages E2E Test Summary" >> $GITHUB_STEP_SUMMARY
+          echo "# 🚀 Trackyo Deploy & E2E Summary" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Deployment URL:** https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/" >> $GITHUB_STEP_SUMMARY
-          echo "**Live Report URL:** https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/reports/latest/execution-report.html" >> $GITHUB_STEP_SUMMARY
+          echo "| Item | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|---|---|" >> $GITHUB_STEP_SUMMARY
+          echo "| Build | #${{ github.run_number }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Deployed URL | https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/ |" >> $GITHUB_STEP_SUMMARY
+          echo "| Live Report | https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/reports/latest/execution-report.html |" >> $GITHUB_STEP_SUMMARY
+          echo "| Test Cases | 300 Selenium E2E |" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "Please see the workflow artifacts for the full download of the Excel sheets and screenshots." >> $GITHUB_STEP_SUMMARY
+          if [ -f "Test Results/Summary/summary.md" ]; then
+            cat "Test Results/Summary/summary.md" >> $GITHUB_STEP_SUMMARY
+          fi

@@ -1,16 +1,68 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { Sparkles, Mail, Lock, User, Phone, DollarSign, Palette, Eye, EyeOff } from 'lucide-react';
-import GlassCard from '../components/GlassCard';
+
+const InputField = ({ label, icon: Icon, type = 'text', name, placeholder, value, onChange, required, rightElement, showLabel = true }) => (
+  <div className="flex flex-col gap-1.5">
+    {showLabel && (
+      <label className="text-[10px] font-bold uppercase tracking-widest pl-1" style={{ color: 'var(--text-secondary)' }}>
+        {label}
+      </label>
+    )}
+    <div className="relative flex items-center">
+      <Icon
+        className="absolute left-3 w-4 h-4 pointer-events-none z-10 flex-shrink-0"
+        style={{ color: 'var(--text-secondary)' }}
+      />
+      <input
+        type={type}
+        name={name}
+        required={required}
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        className="theme-input w-full text-sm"
+        style={{ paddingLeft: '2.5rem', paddingRight: rightElement ? '2.75rem' : '1rem' }}
+      />
+      {rightElement && (
+        <div className="absolute right-3 flex items-center z-10">
+          {rightElement}
+        </div>
+      )}
+    </div>
+  </div>
+);
+
+const SelectField = ({ label, icon: Icon, name, value, onChange, children }) => (
+  <div className="flex flex-col gap-1.5">
+    <label className="text-[10px] font-bold uppercase tracking-widest pl-1" style={{ color: 'var(--text-secondary)' }}>
+      {label}
+    </label>
+    <div className="relative flex items-center">
+      <Icon
+        className="absolute left-3 w-4 h-4 pointer-events-none z-10 flex-shrink-0"
+        style={{ color: 'var(--text-secondary)' }}
+      />
+      <select
+        name={name}
+        value={value}
+        onChange={onChange}
+        className="theme-input w-full text-xs appearance-none"
+        style={{ paddingLeft: '2.5rem', paddingRight: '1rem' }}
+      >
+        {children}
+      </select>
+    </div>
+  </div>
+);
 
 const AuthPages = ({ showToast }) => {
   const [isLogin, setIsLogin] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  
+
   const { login, register, forgotPassword } = useAuth();
 
-  // Form Fields State
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -30,13 +82,11 @@ const AuthPages = ({ showToast }) => {
     setLoading(true);
 
     if (isLogin) {
-      // Login Action
       if (!formData.email || !formData.password) {
         showToast('Please fill all required fields', 'warning');
         setLoading(false);
         return;
       }
-
       const res = await login(formData.email, formData.password);
       if (res.success) {
         showToast('Logged in successfully! Welcome to Trackyo.', 'success');
@@ -44,13 +94,11 @@ const AuthPages = ({ showToast }) => {
         showToast(res.message, 'danger');
       }
     } else {
-      // Registration Action
       if (!formData.name || !formData.email || !formData.password || !formData.mobile) {
         showToast('Please fill all required fields', 'warning');
         setLoading(false);
         return;
       }
-
       const res = await register(
         formData.name,
         formData.email,
@@ -59,7 +107,6 @@ const AuthPages = ({ showToast }) => {
         formData.preferredCurrency,
         formData.themePreference
       );
-
       if (res.success) {
         showToast('Account registered successfully!', 'success');
       } else {
@@ -75,200 +122,186 @@ const AuthPages = ({ showToast }) => {
       return;
     }
     const res = await forgotPassword(formData.email);
-    if (res.success) {
-      showToast(res.message, 'success');
-    } else {
-      showToast(res.message, 'danger');
-    }
+    showToast(res.message, res.success ? 'success' : 'danger');
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-themeBg select-none">
-      
-      {/* Visual background glowing orbs */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-themePrimary/10 filter blur-3xl animate-pulse" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-themeAccent/10 filter blur-3xl animate-pulse delay-700" />
+    <div
+      className="min-h-screen flex items-center justify-center relative overflow-auto select-none"
+      style={{ background: 'var(--background)', padding: '2rem 1rem' }}
+    >
+      {/* Background glowing orbs */}
+      <div
+        className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full pointer-events-none"
+        style={{ background: 'rgba(99,102,241,0.08)', filter: 'blur(80px)' }}
+      />
+      <div
+        className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full pointer-events-none"
+        style={{ background: 'rgba(16,185,129,0.07)', filter: 'blur(80px)' }}
+      />
 
-      <GlassCard className="w-full max-w-md relative z-10 p-8 shadow-glass transition-all duration-500">
-        
+      {/* Auth Card */}
+      <div
+        className="glass-panel rounded-2xl relative z-10 w-full"
+        style={{ maxWidth: '440px', padding: '2rem' }}
+      >
         {/* Brand Banner */}
-        <div className="flex flex-col items-center justify-center text-center mb-8">
-          <div className="p-3 rounded-2xl bg-themePrimary text-white shadow-neon-glow flex items-center justify-center mb-3">
-            <Sparkles className="w-8 h-8 animate-spin" style={{ animationDuration: '6s' }} />
+        <div className="flex flex-col items-center text-center mb-7">
+          <div
+            className="flex items-center justify-center w-14 h-14 rounded-2xl mb-3 shadow-lg"
+            style={{ background: 'var(--primary-accent)' }}
+          >
+            <Sparkles className="w-7 h-7 text-white" style={{ animation: 'spin 6s linear infinite' }} />
           </div>
-          <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-themePrimary to-themeAccent">
+          <h2
+            className="text-2xl font-extrabold tracking-tight"
+            style={{
+              background: 'linear-gradient(to right, var(--primary-accent), var(--accent-color))',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}
+          >
             {isLogin ? 'Welcome Back' : 'Create Account'}
           </h2>
-          <p className="text-xs text-themeTextMuted mt-1.5 font-bold tracking-wide uppercase">
-            {isLogin ? '“Track Smart. Spend Wise. That’s Trackyo.”' : 'Start automated AI expense tracking'}
+          <p className="text-xs font-bold tracking-widest uppercase mt-1.5" style={{ color: 'var(--text-secondary)' }}>
+            {isLogin ? 'Track Smart. Spend Wise. That\'s Trackyo.' : 'Start Automated AI Expense Tracking'}
           </p>
         </div>
 
-        {/* Auth Forms */}
-        <form onSubmit={handleAuthSubmit} className="space-y-4">
-          
-          {/* Registration fields */}
+        {/* Form */}
+        <form onSubmit={handleAuthSubmit} className="flex flex-col gap-4">
+
+          {/* Registration-only fields */}
           {!isLogin && (
             <>
-              {/* Full Name */}
-              <div className="flex flex-col">
-                <label className="text-[10px] font-bold text-themeTextMuted uppercase mb-1.5 pl-1">Full Name*</label>
-                <div className="relative">
-                  <User className="absolute left-3 top-3.5 w-4 h-4 text-themeTextMuted" />
-                  <input
-                    type="text"
-                    name="name"
-                    required
-                    placeholder="Rahul Sharma"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    className="theme-input pl-10 w-full text-sm"
-                  />
-                </div>
-              </div>
-
-              {/* Mobile Number */}
-              <div className="flex flex-col">
-                <label className="text-[10px] font-bold text-themeTextMuted uppercase mb-1.5 pl-1">Mobile Number*</label>
-                <div className="relative">
-                  <Phone className="absolute left-3 top-3.5 w-4 h-4 text-themeTextMuted" />
-                  <input
-                    type="tel"
-                    name="mobile"
-                    required
-                    placeholder="9876543210"
-                    value={formData.mobile}
-                    onChange={handleInputChange}
-                    className="theme-input pl-10 w-full text-sm"
-                  />
-                </div>
-              </div>
+              <InputField
+                label="Full Name*"
+                icon={User}
+                name="name"
+                placeholder="Rahul Sharma"
+                value={formData.name}
+                onChange={handleInputChange}
+                required
+              />
+              <InputField
+                label="Mobile Number*"
+                icon={Phone}
+                type="tel"
+                name="mobile"
+                placeholder="9876543210"
+                value={formData.mobile}
+                onChange={handleInputChange}
+                required
+              />
             </>
           )}
 
-          {/* Email Address */}
-          <div className="flex flex-col">
-            <label className="text-[10px] font-bold text-themeTextMuted uppercase mb-1.5 pl-1">Email Address*</label>
-            <div className="relative">
-              <Mail className="absolute left-3 top-3.5 w-4 h-4 text-themeTextMuted" />
-              <input
-                type="email"
-                name="email"
-                required
-                placeholder="rahul@trackyo.in"
-                value={formData.email}
-                onChange={handleInputChange}
-                className="theme-input pl-10 w-full text-sm"
-              />
-            </div>
-          </div>
+          {/* Email */}
+          <InputField
+            label="Email Address*"
+            icon={Mail}
+            type="email"
+            name="email"
+            placeholder="Email Address"
+            value={formData.email}
+            onChange={handleInputChange}
+            required
+            showLabel={!isLogin}
+          />
 
           {/* Password */}
-          <div className="flex flex-col">
-            <label className="text-[10px] font-bold text-themeTextMuted uppercase mb-1.5 pl-1">Password*</label>
-            <div className="relative">
-              <Lock className="absolute left-3 top-3.5 w-4 h-4 text-themeTextMuted" />
-              <input
-                type={showPassword ? 'text' : 'password'}
-                name="password"
-                required
-                placeholder="••••••"
-                value={formData.password}
-                onChange={handleInputChange}
-                className="theme-input pl-10 pr-10 w-full text-sm"
-              />
+          <InputField
+            label="Password*"
+            icon={Lock}
+            showLabel={!isLogin}
+            type={showPassword ? 'text' : 'password'}
+            name="password"
+            placeholder="••••••••"
+            value={formData.password}
+            onChange={handleInputChange}
+            required
+            rightElement={
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-3.5 text-themeTextMuted hover:text-themeText transition-all"
+                className="flex items-center justify-center transition-all"
+                style={{ color: 'var(--text-secondary)' }}
               >
                 {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
               </button>
-            </div>
-          </div>
+            }
+          />
 
-          {/* Currency & Theme Selection Grid */}
+          {/* Currency & Theme — Register only */}
           {!isLogin && (
-            <div className="grid grid-cols-2 gap-4">
-              <div className="flex flex-col">
-                <label className="text-[10px] font-bold text-themeTextMuted uppercase mb-1.5 pl-1">Preferred Currency</label>
-                <div className="relative">
-                  <DollarSign className="absolute left-3 top-3.5 w-4 h-4 text-themeTextMuted" />
-                  <select
-                    name="preferredCurrency"
-                    value={formData.preferredCurrency}
-                    onChange={handleInputChange}
-                    className="theme-input pl-10 w-full text-xs"
-                  >
-                    <option value="INR" className="bg-slate-900 text-white">INR (Rs.)</option>
-                    <option value="USD" className="bg-slate-900 text-white">USD ($)</option>
-                    <option value="EUR" className="bg-slate-900 text-white">EUR (€)</option>
-                    <option value="GBP" className="bg-slate-900 text-white">GBP (£)</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="flex flex-col">
-                <label className="text-[10px] font-bold text-themeTextMuted uppercase mb-1.5 pl-1">Theme Style</label>
-                <div className="relative">
-                  <Palette className="absolute left-3 top-3.5 w-4 h-4 text-themeTextMuted" />
-                  <select
-                    name="themePreference"
-                    value={formData.themePreference}
-                    onChange={handleInputChange}
-                    className="theme-input pl-10 w-full text-xs"
-                  >
-                    <option value="dark" className="bg-slate-900 text-white">Dark Mode</option>
-                    <option value="light" className="bg-slate-900 text-white">Light Mode</option>
-                    <option value="neon" className="bg-slate-900 text-white">Cyber Neon</option>
-                    <option value="minimal" className="bg-slate-900 text-white">Mono Minimal</option>
-                  </select>
-                </div>
-              </div>
+            <div className="grid grid-cols-2 gap-3">
+              <SelectField label="Preferred Currency" icon={DollarSign} name="preferredCurrency" value={formData.preferredCurrency} onChange={handleInputChange}>
+                <option value="INR" className="bg-slate-900 text-white">INR (Rs.)</option>
+                <option value="USD" className="bg-slate-900 text-white">USD ($)</option>
+                <option value="EUR" className="bg-slate-900 text-white">EUR (€)</option>
+                <option value="GBP" className="bg-slate-900 text-white">GBP (£)</option>
+              </SelectField>
+              <SelectField label="Theme Style" icon={Palette} name="themePreference" value={formData.themePreference} onChange={handleInputChange}>
+                <option value="dark" className="bg-slate-900 text-white">Dark Mode</option>
+                <option value="light" className="bg-slate-900 text-white">Light Mode</option>
+                <option value="neon" className="bg-slate-900 text-white">Cyber Neon</option>
+                <option value="minimal" className="bg-slate-900 text-white">Mono Minimal</option>
+              </SelectField>
             </div>
           )}
 
-          {/* Forgot Password Link */}
+          {/* Forgot Password */}
           {isLogin && (
-            <div className="flex justify-end pr-1 text-right">
+            <div className="flex justify-end">
               <button
                 type="button"
                 onClick={handleForgot}
-                className="text-[11px] font-black text-themePrimary hover:text-themePrimaryHover transition-all hover:underline"
+                className="text-xs font-bold transition-all hover:underline"
+                style={{ color: 'var(--primary-accent)' }}
               >
                 Forgot Password?
               </button>
             </div>
           )}
 
-          {/* Submit Action */}
+          {/* Submit Button */}
           <button
             type="submit"
             disabled={loading}
-            className="w-full mt-2 py-3 rounded-xl bg-themePrimary text-white shadow-neon-glow hover:bg-themePrimaryHover font-bold text-sm tracking-wide transition-all flex items-center justify-center space-x-1.5"
+            className="w-full py-3 rounded-xl text-white font-bold text-sm tracking-wide transition-all flex items-center justify-center gap-2 mt-1"
+            style={{
+              background: 'var(--primary-accent)',
+              boxShadow: '0 0 20px rgba(99,102,241,0.4)',
+            }}
+            onMouseEnter={e => (e.currentTarget.style.background = 'var(--primary-hover)')}
+            onMouseLeave={e => (e.currentTarget.style.background = 'var(--primary-accent)')}
           >
             {loading ? (
-              <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-white"></div>
+              <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
             ) : (
               <span>{isLogin ? 'Sign In Securely' : 'Register Account'}</span>
             )}
           </button>
 
-          {/* Toggle Panel Button */}
-          <div className="text-center pt-4 border-t border-themeBorder text-xs text-themeTextMuted">
-            <span>{isLogin ? "Don't have an account? " : 'Already registered with us? '}</span>
+          {/* Toggle Login/Register */}
+          <div
+            className="text-center pt-4 text-xs border-t"
+            style={{ color: 'var(--text-secondary)', borderColor: 'var(--card-border)' }}
+          >
+            <span>{isLogin ? "Don't have an account? " : 'Already registered? '}</span>
             <button
               type="button"
               onClick={() => setIsLogin(!isLogin)}
-              className="font-black text-themePrimary hover:text-themePrimaryHover transition-all hover:underline"
+              className="font-bold hover:underline transition-all"
+              style={{ color: 'var(--primary-accent)' }}
             >
               {isLogin ? 'Create Account' : 'Sign In'}
             </button>
           </div>
 
         </form>
-
-      </GlassCard>
+      </div>
     </div>
   );
 };

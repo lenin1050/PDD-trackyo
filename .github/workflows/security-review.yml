@@ -1,0 +1,168 @@
+name: Security Scan & Vulnerability Review
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 2 * * 1'    # Every Monday 2AM UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  security-events: write
+
+jobs:
+  security-scan:
+    name: SAST & Dependency Audit
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      # ── Frontend Audit ───────────────────────────────────────────
+      - name: Audit Frontend Dependencies
+        working-directory: ./trackyo_website/frontend
+        run: |
+          npm install --legacy-peer-deps
+          echo "=== FRONTEND NPM AUDIT ===" >> ../../security-audit-results.txt
+          npm audit --json >> ../../security-audit-results.txt 2>&1 || true
+          npm audit >> ../../security-audit-report.txt 2>&1 || true
+        continue-on-error: true
+
+      # ── Backend Audit ────────────────────────────────────────────
+      - name: Audit Backend Dependencies
+        working-directory: ./trackyo_website/backend
+        run: |
+          npm install
+          echo "=== BACKEND NPM AUDIT ===" >> ../../security-audit-results.txt
+          npm audit --json >> ../../security-audit-results.txt 2>&1 || true
+          npm audit >> ../../security-audit-report.txt 2>&1 || true
+        continue-on-error: true
+
+      # ── Secret Scanning ──────────────────────────────────────────
+      - name: Check for Hardcoded Secrets
+        run: |
+          echo "=== SECRET SCAN ===" >> security-audit-report.txt
+          # Check for hardcoded JWT secrets
+          if grep -r "trackyosecretjwt" --include="*.js" --include="*.ts" .; then
+            echo "⚠️  CRITICAL: Hardcoded JWT secret found in codebase!" >> security-audit-report.txt
+            echo "CRITICAL_SECRETS_FOUND=true" >> $GITHUB_ENV
+          else
+            echo "✅ No hardcoded JWT secrets detected." >> security-audit-report.txt
+          fi
+          # Check for plaintext passwords
+          if grep -rn "password.*=.*['\"].\{6,\}['\"]" --include="*.js" . | grep -v "node_modules" | grep -v ".test." | grep -v "placeholder"; then
+            echo "⚠️  WARNING: Possible hardcoded passwords found." >> security-audit-report.txt
+          fi
+          # Check for exposed API keys
+          if grep -rn "GEMINI_API_KEY\s*=\s*['\"]AIza" --include="*.js" --include="*.env" . 2>/dev/null; then
+            echo "⚠️  WARNING: Gemini API key may be hardcoded." >> security-audit-report.txt
+          fi
+        continue-on-error: true
+
+      # ── CORS Check ───────────────────────────────────────────────
+      - name: Check CORS Configuration
+        run: |
+          echo "=== CORS SCAN ===" >> security-audit-report.txt
+          if grep -rn "origin.*\*" --include="*.js" . | grep -v node_modules; then
+            echo "⚠️  WARNING: CORS wildcard origin '*' found!" >> security-audit-report.txt
+            echo "CORS_WILDCARD=true" >> $GITHUB_ENV
+          else
+            echo "✅ No CORS wildcard detected." >> security-audit-report.txt
+          fi
+
+      # ── Security Headers Check ───────────────────────────────────
+      - name: Check Security Headers
+        run: |
+          echo "=== SECURITY HEADERS CHECK ===" >> security-audit-report.txt
+          if grep -rn "helmet" --include="*.js" . | grep -v node_modules | grep -v ".test."; then
+            echo "✅ Helmet middleware found." >> security-audit-report.txt
+          else
+            echo "⚠️  WARNING: Helmet middleware not detected!" >> security-audit-report.txt
+          fi
+          if grep -rn "express-rate-limit\|rateLimit" --include="*.js" . | grep -v node_modules; then
+            echo "✅ Rate limiting found." >> security-audit-report.txt
+          else
+            echo "⚠️  WARNING: No rate limiting detected!" >> security-audit-report.txt
+          fi
+
+      # ── Generate Security Report ─────────────────────────────────
+      - name: Generate Security Summary
+        run: |
+          {
+            echo "# Trackyo Security Scan Report"
+            echo ""
+            echo "**Run:** ${{ github.run_number }}"
+            echo "**Triggered by:** ${{ github.actor }}"
+            echo "**Date:** $(date -u '+%Y-%m-%d %H:%M UTC')"
+            echo "**Branch:** ${{ github.ref_name }}"
+            echo ""
+            echo "## npm audit summary"
+            cat security-audit-report.txt 2>/dev/null || echo "_No audit output_"
+            echo ""
+            echo "## Environment Findings"
+            if [ "$CRITICAL_SECRETS_FOUND" = "true" ]; then
+              echo "❌ **CRITICAL:** Hardcoded JWT secret detected — immediate remediation required."
+            else
+              echo "✅ No hardcoded JWT secrets in source code."
+            fi
+            if [ "$CORS_WILDCARD" = "true" ]; then
+              echo "⚠️  **HIGH:** CORS wildcard policy active — restrict to known origins."
+            else
+              echo "✅ CORS origin is restricted."
+            fi
+          } > "Vulnerability Test Results/security-scan-${{ github.run_number }}.md"
+        continue-on-error: true
+
+      # ── Copy static security reports ────────────────────────────
+      - name: Update security-review.md timestamp
+        run: |
+          if [ -f "Vulnerability Test Results/security-review.md" ]; then
+            echo "" >> "Vulnerability Test Results/security-review.md"
+            echo "_Last CI scan: $(date -u '+%Y-%m-%d %H:%M UTC') — Build ${{ github.run_number }}_" >> "Vulnerability Test Results/security-review.md"
+          fi
+        continue-on-error: true
+
+      # ── Upload artifacts ─────────────────────────────────────────
+      - name: Upload Security Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Security-Reports-${{ github.run_number }}
+          path: |
+            Vulnerability Test Results/
+            security-audit-results.txt
+            security-audit-report.txt
+
+      # ── Commit updated reports back to repo ─────────────────────
+      - name: Commit Security Reports
+        if: github.ref == 'refs/heads/main'
+        run: |
+          git config --global user.name  "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add "Vulnerability Test Results/" || true
+          git diff --staged --quiet || git commit -m "ci: update security scan report [build ${{ github.run_number }}]"
+          git push || true
+        continue-on-error: true
+
+      # ── Step Summary ─────────────────────────────────────────────
+      - name: Publish Step Summary
+        if: always()
+        run: |
+          echo "# 🔒 Security Scan Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Check | Result |" >> $GITHUB_STEP_SUMMARY
+          echo "|---|---|" >> $GITHUB_STEP_SUMMARY
+          echo "| Hardcoded Secrets | $([[ "$CRITICAL_SECRETS_FOUND" == "true" ]] && echo '❌ FOUND' || echo '✅ Clean') |" >> $GITHUB_STEP_SUMMARY
+          echo "| CORS Wildcard | $([[ "$CORS_WILDCARD" == "true" ]] && echo '⚠️  Detected' || echo '✅ Restricted') |" >> $GITHUB_STEP_SUMMARY
+          echo "| npm audit frontend | $(cat security-audit-report.txt | grep 'vulnerabilities' | head -1 || echo 'See artifact') |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📎 Full reports in workflow artifacts." >> $GITHUB_STEP_SUMMARY

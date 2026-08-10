@@ -1,0 +1,624 @@
+[2026-08-10 13:59:40] [INFO] Starting E2E Test Suite for Trackyo AI Expense Tracker
+[2026-08-10 13:59:40] [INFO] Seeding database and launching local test environment
+[2026-08-10 13:59:40] [INFO] Spinning up virtual MongoDB Memory Server on port 27017...
+[2026-08-10 14:01:08] [INFO] Virtual MongoDB started successfully!
+[2026-08-10 14:01:08] [INFO] Running utils/seedData.js...
+[2026-08-10 14:01:22] [INFO] Mock database tables successfully seeded!
+[2026-08-10 14:01:22] [INFO] Launching Trackyo Backend Server (Port 5000)...
+[2026-08-10 14:01:28] [INFO] Backend server is operational!
+[2026-08-10 14:01:28] [INFO] Launching Trackyo Frontend Vite Server (Port 5173)...
+[2026-08-10 14:01:45] [INFO] Frontend web application is operational!
+[2026-08-10 14:01:45] [INFO] Initializing Selenium Chrome WebDriver (Headless mode)...
+[2026-08-10 14:01:51] [INFO] Selenium Chrome session established. Navigating to http://localhost:5173/
+[2026-08-10 14:01:54] [INFO] Starting test execution of 300 E2E cases...
+[2026-08-10 14:01:54] [INFO] Running test: [Landing & Initialization] test_page_title_matches_app_name
+[2026-08-10 14:01:54] [INFO] [Landing & Initialization] test_page_title_matches_app_name -> PASSED in 0.01s
+[2026-08-10 14:01:54] [INFO] Running test: [Landing & Initialization] test_page_loads_successfully
+[2026-08-10 14:01:54] [INFO] [Landing & Initialization] test_page_loads_successfully -> PASSED in 0.03s
+[2026-08-10 14:01:54] [INFO] Running test: [Landing & Initialization] test_app_logo_is_rendered
+[2026-08-10 14:01:54] [INFO] [Landing & Initialization] test_app_logo_is_rendered -> PASSED in 0.02s
+[2026-08-10 14:01:54] [INFO] Running test: [Landing & Initialization] test_currency_options_present
+[2026-08-10 14:01:54] [INFO] [Landing & Initialization] test_currency_options_present -> PASSED in 0.18s
+[2026-08-10 14:01:54] [INFO] Running test: [Landing & Initialization] test_theme_options_present
+[2026-08-10 14:01:54] [INFO] [Landing & Initialization] test_theme_options_present -> PASSED in 0.13s
+[2026-08-10 14:01:54] [INFO] Running test: [Landing & Initialization] test_brand_heading_visible
+[2026-08-10 14:01:54] [INFO] [Landing & Initialization] test_brand_heading_visible -> PASSED in 0.01s
+[2026-08-10 14:01:54] [INFO] Running test: [Landing & Initialization] test_brand_motto_visible
+[2026-08-10 14:01:54] [INFO] [Landing & Initialization] test_brand_motto_visible -> PASSED in 0.01s
+[2026-08-10 14:01:54] [INFO] Running test: [Landing & Initialization] test_email_input_visible
+[2026-08-10 14:01:54] [INFO] [Landing & Initialization] test_email_input_visible -> PASSED in 0.13s
+[2026-08-10 14:01:54] [INFO] Running test: [Landing & Initialization] test_password_input_visible
+[2026-08-10 14:01:54] [INFO] [Landing & Initialization] test_password_input_visible -> PASSED in 0.01s
+[2026-08-10 14:01:54] [INFO] Running test: [Landing & Initialization] test_password_placeholder_check
+[2026-08-10 14:01:54] [INFO] [Landing & Initialization] test_password_placeholder_check -> PASSED in 0.01s
+[2026-08-10 14:01:54] [INFO] Running test: [Landing & Initialization] test_eye_icon_toggles_password_visibility
+[2026-08-10 14:01:54] [INFO] [Landing & Initialization] test_eye_icon_toggles_password_visibility -> PASSED in 0.11s
+[2026-08-10 14:01:54] [INFO] Running test: [Authentication & Session] test_register_missing_fields_validation
+[2026-08-10 14:01:54] [INFO] [Authentication & Session] test_register_missing_fields_validation -> PASSED in 0.15s
+[2026-08-10 14:01:54] [INFO] Running test: [Authentication & Session] test_register_weak_password_flow
+[2026-08-10 14:01:55] [INFO] [Authentication & Session] test_register_weak_password_flow -> PASSED in 0.98s
+[2026-08-10 14:01:55] [INFO] Running test: [Authentication & Session] test_register_duplicate_email_error
+[2026-08-10 14:01:59] [ERROR] [Authentication & Session] test_register_duplicate_email_error -> FAILED: Waiting for element to be located By(xpath, //button[text()='Sign In'])
+Wait timed out after 3047ms
+[2026-08-10 14:01:59] [INFO] Screenshot captured for failed test: C:\Users\noname\Downloads\trackyo_website\Test Results\Screenshots\test_register_duplicate_email_error_failed.png
+[2026-08-10 14:01:59] [INFO] Running test: [Authentication & Session] test_register_successful_flow
+[2026-08-10 14:02:00] [INFO] [Authentication & Session] test_register_successful_flow -> PASSED in 1.24s
+[2026-08-10 14:02:00] [INFO] Running test: [Authentication & Session] test_login_invalid_password_error
+[2026-08-10 14:02:01] [INFO] [Authentication & Session] test_login_invalid_password_error -> PASSED in 0.62s
+[2026-08-10 14:02:01] [INFO] Running test: [Authentication & Session] test_login_non_existent_email_error
+[2026-08-10 14:02:01] [INFO] [Authentication & Session] test_login_non_existent_email_error -> PASSED in 0.31s
+[2026-08-10 14:02:01] [INFO] Running test: [Authentication & Session] test_forgot_password_empty_email
+[2026-08-10 14:02:02] [INFO] [Authentication & Session] test_forgot_password_empty_email -> PASSED in 0.20s
+[2026-08-10 14:02:02] [INFO] Running test: [Authentication & Session] test_forgot_password_triggers_mock_reset
+[2026-08-10 14:02:02] [INFO] [Authentication & Session] test_forgot_password_triggers_mock_reset -> PASSED in 0.29s
+[2026-08-10 14:02:02] [INFO] Running test: [Authentication & Session] test_login_successful_flow
+[2026-08-10 14:02:03] [INFO] [Authentication & Session] test_login_successful_flow -> PASSED in 0.62s
+[2026-08-10 14:02:03] [INFO] Running test: [Authentication & Session] test_sidebar_user_profile_name
+[2026-08-10 14:02:03] [INFO] [Authentication & Session] test_sidebar_user_profile_name -> PASSED in 0.08s
+[2026-08-10 14:02:03] [INFO] Running test: [Authentication & Session] test_sidebar_user_profile_email
+[2026-08-10 14:02:03] [INFO] [Authentication & Session] test_sidebar_user_profile_email -> PASSED in 0.03s
+[2026-08-10 14:02:03] [INFO] Running test: [Authentication & Session] test_sidebar_tabs_rendered
+[2026-08-10 14:02:03] [INFO] [Authentication & Session] test_sidebar_tabs_rendered -> PASSED in 0.04s
+[2026-08-10 14:02:03] [INFO] Running test: [Authentication & Session] test_dashboard_page_heading
+[2026-08-10 14:02:03] [INFO] [Authentication & Session] test_dashboard_page_heading -> PASSED in 0.07s
+[2026-08-10 14:02:03] [INFO] Running test: [Authentication & Session] test_logout_and_redirect_flow
+[2026-08-10 14:02:03] [INFO] [Authentication & Session] test_logout_and_redirect_flow -> PASSED in 0.25s
+[2026-08-10 14:02:03] [INFO] Running test: [Authentication & Session] test_login_newly_registered_user
+[2026-08-10 14:02:04] [INFO] [Authentication & Session] test_login_newly_registered_user -> PASSED in 1.23s
+[2026-08-10 14:02:04] [INFO] Running test: [Dashboard Overview] test_relogin_as_rahul
+[2026-08-10 14:02:05] [INFO] [Dashboard Overview] test_relogin_as_rahul -> PASSED in 0.81s
+[2026-08-10 14:02:05] [INFO] Running test: [Dashboard Overview] test_dashboard_summary_cards_present
+[2026-08-10 14:02:05] [INFO] [Dashboard Overview] test_dashboard_summary_cards_present -> PASSED in 0.21s
+[2026-08-10 14:02:05] [INFO] Running test: [Dashboard Overview] test_stat_balance_value
+[2026-08-10 14:02:05] [INFO] [Dashboard Overview] test_stat_balance_value -> PASSED in 0.06s
+[2026-08-10 14:02:05] [INFO] Running test: [Dashboard Overview] test_stat_spent_value
+[2026-08-10 14:02:05] [INFO] [Dashboard Overview] test_stat_spent_value -> PASSED in 0.05s
+[2026-08-10 14:02:05] [INFO] Running test: [Dashboard Overview] test_stat_weekly_spent_value
+[2026-08-10 14:02:05] [INFO] [Dashboard Overview] test_stat_weekly_spent_value -> PASSED in 0.07s
+[2026-08-10 14:02:05] [INFO] Running test: [Dashboard Overview] test_budget_limit_gauge_presence
+[2026-08-10 14:02:05] [INFO] [Dashboard Overview] test_budget_limit_gauge_presence -> PASSED in 0.07s
+[2026-08-10 14:02:05] [INFO] Running test: [Dashboard Overview] test_weekly_chart_presence
+[2026-08-10 14:02:06] [INFO] [Dashboard Overview] test_weekly_chart_presence -> PASSED in 0.06s
+[2026-08-10 14:02:06] [INFO] Running test: [Dashboard Overview] test_recent_transactions_grid_loads
+[2026-08-10 14:02:06] [INFO] [Dashboard Overview] test_recent_transactions_grid_loads -> PASSED in 0.01s
+[2026-08-10 14:02:06] [INFO] Running test: [Dashboard Overview] test_gemini_insights_visible
+[2026-08-10 14:02:06] [INFO] [Dashboard Overview] test_gemini_insights_visible -> PASSED in 0.02s
+[2026-08-10 14:02:06] [INFO] Running test: [Dashboard Overview] test_gemini_insight_tip_is_populated
+[2026-08-10 14:02:06] [INFO] [Dashboard Overview] test_gemini_insight_tip_is_populated -> PASSED in 0.07s
+[2026-08-10 14:02:06] [INFO] Running test: [Dashboard Overview] test_theme_switcher_applied_light
+[2026-08-10 14:02:06] [INFO] [Dashboard Overview] test_theme_switcher_applied_light -> PASSED in 0.35s
+[2026-08-10 14:02:06] [INFO] Running test: [Dashboard Overview] test_theme_switcher_applied_neon
+[2026-08-10 14:02:06] [INFO] [Dashboard Overview] test_theme_switcher_applied_neon -> PASSED in 0.46s
+[2026-08-10 14:02:06] [INFO] Running test: [Dashboard Overview] test_theme_switcher_applied_minimal
+[2026-08-10 14:02:07] [INFO] [Dashboard Overview] test_theme_switcher_applied_minimal -> PASSED in 0.47s
+[2026-08-10 14:02:07] [INFO] Running test: [Dashboard Overview] test_theme_switcher_restores_dark
+[2026-08-10 14:02:08] [INFO] [Dashboard Overview] test_theme_switcher_restores_dark -> PASSED in 0.62s
+[2026-08-10 14:02:08] [INFO] Running test: [Dashboard Overview] test_alert_badge_in_navbar
+[2026-08-10 14:02:08] [INFO] [Dashboard Overview] test_alert_badge_in_navbar -> PASSED in 0.05s
+[2026-08-10 14:02:08] [INFO] Running test: [SMS Parser Simulator] test_sms_modal_trigger
+[2026-08-10 14:02:08] [INFO] [SMS Parser Simulator] test_sms_modal_trigger -> PASSED in 0.28s
+[2026-08-10 14:02:08] [INFO] Running test: [SMS Parser Simulator] test_sms_presets_options_present
+[2026-08-10 14:02:08] [INFO] [SMS Parser Simulator] test_sms_presets_options_present -> PASSED in 0.10s
+[2026-08-10 14:02:08] [INFO] Running test: [SMS Parser Simulator] test_sms_select_swiggy_template
+[2026-08-10 14:02:08] [INFO] [SMS Parser Simulator] test_sms_select_swiggy_template -> PASSED in 0.09s
+[2026-08-10 14:02:08] [INFO] Running test: [SMS Parser Simulator] test_sms_parse_swiggy_details
+[2026-08-10 14:02:08] [INFO] [SMS Parser Simulator] test_sms_parse_swiggy_details -> PASSED in 0.26s
+[2026-08-10 14:02:08] [INFO] Running test: [SMS Parser Simulator] test_sms_select_netflix_template
+[2026-08-10 14:02:08] [INFO] [SMS Parser Simulator] test_sms_select_netflix_template -> PASSED in 0.08s
+[2026-08-10 14:02:08] [INFO] Running test: [SMS Parser Simulator] test_sms_parse_netflix_details
+[2026-08-10 14:02:09] [INFO] [SMS Parser Simulator] test_sms_parse_netflix_details -> PASSED in 0.42s
+[2026-08-10 14:02:09] [INFO] Running test: [SMS Parser Simulator] test_sms_select_amazon_template
+[2026-08-10 14:02:09] [INFO] [SMS Parser Simulator] test_sms_select_amazon_template -> PASSED in 0.09s
+[2026-08-10 14:02:09] [INFO] Running test: [SMS Parser Simulator] test_sms_parse_amazon_details
+[2026-08-10 14:02:09] [INFO] [SMS Parser Simulator] test_sms_parse_amazon_details -> PASSED in 0.40s
+[2026-08-10 14:02:09] [INFO] Running test: [SMS Parser Simulator] test_sms_select_jio_template
+[2026-08-10 14:02:09] [INFO] [SMS Parser Simulator] test_sms_select_jio_template -> PASSED in 0.11s
+[2026-08-10 14:02:09] [INFO] Running test: [SMS Parser Simulator] test_sms_parse_jio_details
+[2026-08-10 14:02:10] [INFO] [SMS Parser Simulator] test_sms_parse_jio_details -> PASSED in 0.41s
+[2026-08-10 14:02:10] [INFO] Running test: [SMS Parser Simulator] test_sms_custom_message_input
+[2026-08-10 14:02:10] [INFO] [SMS Parser Simulator] test_sms_custom_message_input -> PASSED in 0.19s
+[2026-08-10 14:02:10] [INFO] Running test: [SMS Parser Simulator] test_sms_parse_custom_message
+[2026-08-10 14:02:10] [INFO] [SMS Parser Simulator] test_sms_parse_custom_message -> PASSED in 0.40s
+[2026-08-10 14:02:10] [INFO] Running test: [SMS Parser Simulator] test_sms_empty_parse_error
+[2026-08-10 14:02:11] [ERROR] [SMS Parser Simulator] test_sms_empty_parse_error -> FAILED: Expected warning toast for empty SMS alert but got: SMS Alert parsed successfully!
+[2026-08-10 14:02:11] [INFO] Screenshot captured for failed test: C:\Users\noname\Downloads\trackyo_website\Test Results\Screenshots\test_sms_empty_parse_error_failed.png
+[2026-08-10 14:02:11] [INFO] Running test: [SMS Parser Simulator] test_sms_save_transaction_to_ledger
+[2026-08-10 14:02:12] [INFO] [SMS Parser Simulator] test_sms_save_transaction_to_ledger -> PASSED in 0.83s
+[2026-08-10 14:02:12] [INFO] Running test: [SMS Parser Simulator] test_sms_close_modal_action
+[2026-08-10 14:02:13] [INFO] [SMS Parser Simulator] test_sms_close_modal_action -> PASSED in 1.17s
+[2026-08-10 14:02:13] [INFO] Running test: [OCR Scanner Simulator] test_ocr_modal_trigger
+[2026-08-10 14:02:13] [INFO] [OCR Scanner Simulator] test_ocr_modal_trigger -> PASSED in 0.10s
+[2026-08-10 14:02:13] [INFO] Running test: [OCR Scanner Simulator] test_ocr_presets_dropdown_present
+[2026-08-10 14:02:13] [INFO] [OCR Scanner Simulator] test_ocr_presets_dropdown_present -> PASSED in 0.08s
+[2026-08-10 14:02:13] [INFO] Running test: [OCR Scanner Simulator] test_ocr_select_zara_template
+[2026-08-10 14:02:14] [INFO] [OCR Scanner Simulator] test_ocr_select_zara_template -> PASSED in 0.11s
+[2026-08-10 14:02:14] [INFO] Running test: [OCR Scanner Simulator] test_ocr_run_zara_simulation
+[2026-08-10 14:02:14] [INFO] [OCR Scanner Simulator] test_ocr_run_zara_simulation -> PASSED in 0.40s
+[2026-08-10 14:02:14] [INFO] Running test: [OCR Scanner Simulator] test_ocr_select_zomato_template
+[2026-08-10 14:02:14] [INFO] [OCR Scanner Simulator] test_ocr_select_zomato_template -> PASSED in 0.10s
+[2026-08-10 14:02:14] [INFO] Running test: [OCR Scanner Simulator] test_ocr_run_zomato_simulation
+[2026-08-10 14:02:15] [INFO] [OCR Scanner Simulator] test_ocr_run_zomato_simulation -> PASSED in 0.51s
+[2026-08-10 14:02:15] [INFO] Running test: [OCR Scanner Simulator] test_ocr_extracted_amount_display
+[2026-08-10 14:02:15] [INFO] [OCR Scanner Simulator] test_ocr_extracted_amount_display -> PASSED in 0.02s
+[2026-08-10 14:02:15] [INFO] Running test: [OCR Scanner Simulator] test_ocr_extracted_category_display
+[2026-08-10 14:02:15] [INFO] [OCR Scanner Simulator] test_ocr_extracted_category_display -> PASSED in 0.02s
+[2026-08-10 14:02:15] [INFO] Running test: [OCR Scanner Simulator] test_ocr_confirm_saving_receipt
+[2026-08-10 14:02:15] [INFO] [OCR Scanner Simulator] test_ocr_confirm_saving_receipt -> PASSED in 0.43s
+[2026-08-10 14:02:15] [INFO] Running test: [OCR Scanner Simulator] test_ocr_close_modal_action
+[2026-08-10 14:02:16] [INFO] [OCR Scanner Simulator] test_ocr_close_modal_action -> PASSED in 1.18s
+[2026-08-10 14:02:16] [INFO] Running test: [Transactions Ledger] test_navigation_to_transactions
+[2026-08-10 14:02:17] [INFO] [Transactions Ledger] test_navigation_to_transactions -> PASSED in 0.45s
+[2026-08-10 14:02:17] [INFO] Running test: [Transactions Ledger] test_ledger_table_headers_rendered
+[2026-08-10 14:02:17] [INFO] [Transactions Ledger] test_ledger_table_headers_rendered -> PASSED in 0.12s
+[2026-08-10 14:02:17] [INFO] Running test: [Transactions Ledger] test_manual_add_expense_modal_trigger
+[2026-08-10 14:02:17] [INFO] [Transactions Ledger] test_manual_add_expense_modal_trigger -> PASSED in 0.51s
+[2026-08-10 14:02:17] [INFO] Running test: [Transactions Ledger] test_manual_add_expense_validation
+[2026-08-10 14:02:17] [INFO] [Transactions Ledger] test_manual_add_expense_validation -> PASSED in 0.20s
+[2026-08-10 14:02:17] [INFO] Running test: [Transactions Ledger] test_manual_add_expense_flow
+[2026-08-10 14:02:19] [INFO] [Transactions Ledger] test_manual_add_expense_flow -> PASSED in 1.04s
+[2026-08-10 14:02:19] [INFO] Running test: [Transactions Ledger] test_ledger_displays_new_transaction
+[2026-08-10 14:02:19] [INFO] [Transactions Ledger] test_ledger_displays_new_transaction -> PASSED in 0.14s
+[2026-08-10 14:02:19] [INFO] Running test: [Transactions Ledger] test_ledger_search_filters_results
+[2026-08-10 14:02:19] [INFO] [Transactions Ledger] test_ledger_search_filters_results -> PASSED in 0.52s
+[2026-08-10 14:02:19] [INFO] Running test: [Transactions Ledger] test_ledger_category_filter_applied
+[2026-08-10 14:02:20] [INFO] [Transactions Ledger] test_ledger_category_filter_applied -> PASSED in 0.44s
+[2026-08-10 14:02:20] [INFO] Running test: [Transactions Ledger] test_ledger_sort_amount_descending
+[2026-08-10 14:02:20] [INFO] [Transactions Ledger] test_ledger_sort_amount_descending -> PASSED in 0.08s
+[2026-08-10 14:02:20] [INFO] Running test: [Transactions Ledger] test_ledger_sort_amount_ascending
+[2026-08-10 14:02:20] [INFO] [Transactions Ledger] test_ledger_sort_amount_ascending -> PASSED in 0.06s
+[2026-08-10 14:02:20] [INFO] Running test: [Transactions Ledger] test_ledger_sort_date_oldest
+[2026-08-10 14:02:20] [INFO] [Transactions Ledger] test_ledger_sort_date_oldest -> PASSED in 0.04s
+[2026-08-10 14:02:20] [INFO] Running test: [Transactions Ledger] test_ledger_sort_date_newest
+[2026-08-10 14:02:20] [INFO] [Transactions Ledger] test_ledger_sort_date_newest -> PASSED in 0.04s
+[2026-08-10 14:02:20] [INFO] Running test: [Transactions Ledger] test_ledger_csv_export
+[2026-08-10 14:02:20] [INFO] [Transactions Ledger] test_ledger_csv_export -> PASSED in 0.07s
+[2026-08-10 14:02:20] [INFO] Running test: [Transactions Ledger] test_ledger_edit_transaction_details
+[2026-08-10 14:02:20] [ERROR] [Transactions Ledger] test_ledger_edit_transaction_details -> FAILED: Failed to edit and save transaction: CSV ledger downloaded successfully!
+[2026-08-10 14:02:21] [INFO] Screenshot captured for failed test: C:\Users\noname\Downloads\trackyo_website\Test Results\Screenshots\test_ledger_edit_transaction_details_failed.png
+[2026-08-10 14:02:21] [INFO] Running test: [Transactions Ledger] test_ledger_delete_transaction
+[2026-08-10 14:02:21] [INFO] [Transactions Ledger] test_ledger_delete_transaction -> PASSED in 0.73s
+[2026-08-10 14:02:21] [INFO] Running test: [Budgets & Alerts] test_navigation_to_budgets
+[2026-08-10 14:02:22] [INFO] [Budgets & Alerts] test_navigation_to_budgets -> PASSED in 0.61s
+[2026-08-10 14:02:22] [INFO] Running test: [Budgets & Alerts] test_budget_cards_all_categories
+[2026-08-10 14:02:22] [INFO] [Budgets & Alerts] test_budget_cards_all_categories -> PASSED in 0.17s
+[2026-08-10 14:02:22] [INFO] Running test: [Budgets & Alerts] test_budget_threshold_percentage_is_shown
+[2026-08-10 14:02:22] [INFO] [Budgets & Alerts] test_budget_threshold_percentage_is_shown -> PASSED in 0.17s
+[2026-08-10 14:02:22] [INFO] Running test: [Budgets & Alerts] test_update_budget_limit_modal_trigger
+[2026-08-10 14:02:23] [INFO] [Budgets & Alerts] test_update_budget_limit_modal_trigger -> PASSED in 0.46s
+[2026-08-10 14:02:23] [INFO] Running test: [Budgets & Alerts] test_update_budget_negative_input_error
+[2026-08-10 14:02:23] [INFO] [Budgets & Alerts] test_update_budget_negative_input_error -> PASSED in 0.52s
+[2026-08-10 14:02:23] [INFO] Running test: [Budgets & Alerts] test_update_budget_limit_success
+[2026-08-10 14:02:24] [INFO] [Budgets & Alerts] test_update_budget_limit_success -> PASSED in 0.65s
+[2026-08-10 14:02:24] [INFO] Running test: [Budgets & Alerts] test_budget_card_value_updated
+[2026-08-10 14:02:24] [INFO] [Budgets & Alerts] test_budget_card_value_updated -> PASSED in 0.11s
+[2026-08-10 14:02:24] [INFO] Running test: [Budgets & Alerts] test_budget_color_coding_green
+[2026-08-10 14:02:24] [INFO] [Budgets & Alerts] test_budget_color_coding_green -> PASSED in 0.00s
+[2026-08-10 14:02:24] [INFO] Running test: [Budgets & Alerts] test_budget_color_coding_amber
+[2026-08-10 14:02:24] [INFO] [Budgets & Alerts] test_budget_color_coding_amber -> PASSED in 0.00s
+[2026-08-10 14:02:24] [INFO] Running test: [Budgets & Alerts] test_budget_color_coding_red
+[2026-08-10 14:02:24] [INFO] [Budgets & Alerts] test_budget_color_coding_red -> PASSED in 0.00s
+[2026-08-10 14:02:24] [INFO] Running test: [Budgets & Alerts] test_budget_limit_breach_logs_notification
+[2026-08-10 14:02:26] [INFO] [Budgets & Alerts] test_budget_limit_breach_logs_notification -> PASSED in 1.47s
+[2026-08-10 14:02:26] [INFO] Running test: [Budgets & Alerts] test_breach_alert_badge_increments
+[2026-08-10 14:02:26] [INFO] [Budgets & Alerts] test_breach_alert_badge_increments -> PASSED in 0.00s
+[2026-08-10 14:02:26] [INFO] Running test: [Budgets & Alerts] test_navigation_to_alerts_tab
+[2026-08-10 14:02:26] [INFO] [Budgets & Alerts] test_navigation_to_alerts_tab -> PASSED in 0.41s
+[2026-08-10 14:02:26] [INFO] Running test: [Budgets & Alerts] test_alert_logs_render_limit_breach
+[2026-08-10 14:02:26] [INFO] [Budgets & Alerts] test_alert_logs_render_limit_breach -> PASSED in 0.04s
+[2026-08-10 14:02:26] [INFO] Running test: [Budgets & Alerts] test_alerts_clear_all_action
+[2026-08-10 14:02:28] [INFO] [Budgets & Alerts] test_alerts_clear_all_action -> PASSED in 1.92s
+[2026-08-10 14:02:28] [INFO] Running test: [Wishlist Goals] test_navigation_to_wishlist
+[2026-08-10 14:02:28] [INFO] [Wishlist Goals] test_navigation_to_wishlist -> PASSED in 0.40s
+[2026-08-10 14:02:28] [INFO] Running test: [Wishlist Goals] test_wishlist_preseeded_goals_render
+[2026-08-10 14:02:28] [INFO] [Wishlist Goals] test_wishlist_preseeded_goals_render -> PASSED in 0.04s
+[2026-08-10 14:02:28] [INFO] Running test: [Wishlist Goals] test_wishlist_add_goal_modal_trigger
+[2026-08-10 14:02:28] [INFO] [Wishlist Goals] test_wishlist_add_goal_modal_trigger -> PASSED in 0.10s
+[2026-08-10 14:02:28] [INFO] Running test: [Wishlist Goals] test_wishlist_add_goal_missing_fields
+[2026-08-10 14:02:29] [INFO] [Wishlist Goals] test_wishlist_add_goal_missing_fields -> PASSED in 0.11s
+[2026-08-10 14:02:29] [INFO] Running test: [Wishlist Goals] test_wishlist_add_goal_success
+[2026-08-10 14:02:29] [INFO] [Wishlist Goals] test_wishlist_add_goal_success -> PASSED in 0.56s
+[2026-08-10 14:02:29] [INFO] Running test: [Wishlist Goals] test_wishlist_goal_visible_in_list
+[2026-08-10 14:02:29] [INFO] [Wishlist Goals] test_wishlist_goal_visible_in_list -> PASSED in 0.06s
+[2026-08-10 14:02:29] [INFO] Running test: [Wishlist Goals] test_wishlist_piggy_deposit_modal_trigger
+[2026-08-10 14:02:29] [INFO] [Wishlist Goals] test_wishlist_piggy_deposit_modal_trigger -> PASSED in 0.07s
+[2026-08-10 14:02:29] [INFO] Running test: [Wishlist Goals] test_wishlist_deposit_negative_value_error
+[2026-08-10 14:02:29] [INFO] [Wishlist Goals] test_wishlist_deposit_negative_value_error -> PASSED in 0.22s
+[2026-08-10 14:02:29] [INFO] Running test: [Wishlist Goals] test_wishlist_deposit_exceeding_remaining_error
+[2026-08-10 14:02:30] [INFO] [Wishlist Goals] test_wishlist_deposit_exceeding_remaining_error -> PASSED in 0.23s
+[2026-08-10 14:02:30] [INFO] Running test: [Wishlist Goals] test_wishlist_deposit_partial_success
+[2026-08-10 14:02:30] [INFO] [Wishlist Goals] test_wishlist_deposit_partial_success -> PASSED in 0.45s
+[2026-08-10 14:02:30] [INFO] Running test: [Wishlist Goals] test_wishlist_progress_bar_updates
+[2026-08-10 14:02:35] [ERROR] [Wishlist Goals] test_wishlist_progress_bar_updates -> FAILED: Wait timed out after 5037ms
+[2026-08-10 14:02:35] [INFO] Screenshot captured for failed test: C:\Users\noname\Downloads\trackyo_website\Test Results\Screenshots\test_wishlist_progress_bar_updates_failed.png
+[2026-08-10 14:02:35] [INFO] Running test: [Wishlist Goals] test_wishlist_withdraw_modal_trigger
+[2026-08-10 14:02:35] [INFO] [Wishlist Goals] test_wishlist_withdraw_modal_trigger -> PASSED in 0.05s
+[2026-08-10 14:02:35] [INFO] Running test: [Wishlist Goals] test_wishlist_withdraw_partial_success
+[2026-08-10 14:02:36] [INFO] [Wishlist Goals] test_wishlist_withdraw_partial_success -> PASSED in 0.41s
+[2026-08-10 14:02:36] [INFO] Running test: [Wishlist Goals] test_wishlist_deposit_completion_flow
+[2026-08-10 14:02:36] [ERROR] [Wishlist Goals] test_wishlist_deposit_completion_flow -> FAILED: Completion congrats modal/toast did not trigger: Successfully deposited ₹72000!
+[2026-08-10 14:02:36] [INFO] Screenshot captured for failed test: C:\Users\noname\Downloads\trackyo_website\Test Results\Screenshots\test_wishlist_deposit_completion_flow_failed.png
+[2026-08-10 14:02:36] [INFO] Running test: [Wishlist Goals] test_wishlist_delete_goal_action
+[2026-08-10 14:02:42] [ERROR] [Wishlist Goals] test_wishlist_delete_goal_action -> FAILED: Wait timed out after 5193ms
+[2026-08-10 14:02:42] [INFO] Screenshot captured for failed test: C:\Users\noname\Downloads\trackyo_website\Test Results\Screenshots\test_wishlist_delete_goal_action_failed.png
+[2026-08-10 14:02:42] [INFO] Running test: [System Auditing & Admin] test_normal_user_denied_admin_tab
+[2026-08-10 14:02:42] [INFO] [System Auditing & Admin] test_normal_user_denied_admin_tab -> PASSED in 0.33s
+[2026-08-10 14:02:42] [INFO] Running test: [System Auditing & Admin] test_normal_user_denied_admin_route
+[2026-08-10 14:02:42] [INFO] [System Auditing & Admin] test_normal_user_denied_admin_route -> PASSED in 0.00s
+[2026-08-10 14:02:42] [INFO] Running test: [System Auditing & Admin] test_admin_user_login_success
+[2026-08-10 14:02:43] [INFO] [System Auditing & Admin] test_admin_user_login_success -> PASSED in 0.79s
+[2026-08-10 14:02:43] [INFO] Running test: [System Auditing & Admin] test_admin_sidebar_shows_admin_link
+[2026-08-10 14:02:43] [INFO] [System Auditing & Admin] test_admin_sidebar_shows_admin_link -> PASSED in 0.02s
+[2026-08-10 14:02:43] [INFO] Running test: [System Auditing & Admin] test_navigation_to_admin_panel
+[2026-08-10 14:02:43] [INFO] [System Auditing & Admin] test_navigation_to_admin_panel -> PASSED in 0.15s
+[2026-08-10 14:02:43] [INFO] Running test: [System Auditing & Admin] test_admin_metrics_users_registered
+[2026-08-10 14:02:44] [INFO] [System Auditing & Admin] test_admin_metrics_users_registered -> PASSED in 0.32s
+[2026-08-10 14:02:44] [INFO] Running test: [System Auditing & Admin] test_admin_user_list_grid
+[2026-08-10 14:02:44] [INFO] [System Auditing & Admin] test_admin_user_list_grid -> PASSED in 0.08s
+[2026-08-10 14:02:44] [INFO] Running test: [System Auditing & Admin] test_admin_live_auditing_logs
+[2026-08-10 14:02:44] [INFO] [System Auditing & Admin] test_admin_live_auditing_logs -> PASSED in 0.04s
+[2026-08-10 14:02:44] [INFO] Running test: [System Auditing & Admin] test_admin_restricted_action_toast
+[2026-08-10 14:02:44] [INFO] [System Auditing & Admin] test_admin_restricted_action_toast -> PASSED in 0.00s
+[2026-08-10 14:02:44] [INFO] Running test: [System Auditing & Admin] test_admin_logout_flow
+[2026-08-10 14:02:44] [INFO] [System Auditing & Admin] test_admin_logout_flow -> PASSED in 0.36s
+[2026-08-10 14:02:44] [INFO] Running test: [Form Input Validation Boundaries] test_boundary_input_validation_case_106
+[2026-08-10 14:02:44] [INFO] [Form Input Validation Boundaries] test_boundary_input_validation_case_106 -> PASSED in 0.01s
+[2026-08-10 14:02:44] [INFO] Running test: [Form Input Validation Boundaries] test_boundary_input_validation_case_107
+[2026-08-10 14:02:44] [INFO] [Form Input Validation Boundaries] test_boundary_input_validation_case_107 -> PASSED in 0.01s
+[2026-08-10 14:02:44] [INFO] Running test: [Form Input Validation Boundaries] test_boundary_input_validation_case_108
+[2026-08-10 14:02:44] [INFO] [Form Input Validation Boundaries] test_boundary_input_validation_case_108 -> PASSED in 0.01s
+[2026-08-10 14:02:44] [INFO] Running test: [Form Input Validation Boundaries] test_boundary_input_validation_case_109
+[2026-08-10 14:02:44] [INFO] [Form Input Validation Boundaries] test_boundary_input_validation_case_109 -> PASSED in 0.01s
+[2026-08-10 14:02:44] [INFO] Running test: [Form Input Validation Boundaries] test_boundary_input_validation_case_110
+[2026-08-10 14:02:44] [INFO] [Form Input Validation Boundaries] test_boundary_input_validation_case_110 -> PASSED in 0.01s
+[2026-08-10 14:02:44] [INFO] Running test: [Form Input Validation Boundaries] test_boundary_input_validation_case_111
+[2026-08-10 14:02:44] [INFO] [Form Input Validation Boundaries] test_boundary_input_validation_case_111 -> PASSED in 0.01s
+[2026-08-10 14:02:44] [INFO] Running test: [Form Input Validation Boundaries] test_boundary_input_validation_case_112
+[2026-08-10 14:02:44] [INFO] [Form Input Validation Boundaries] test_boundary_input_validation_case_112 -> PASSED in 0.01s
+[2026-08-10 14:02:44] [INFO] Running test: [Form Input Validation Boundaries] test_boundary_input_validation_case_113
+[2026-08-10 14:02:44] [INFO] [Form Input Validation Boundaries] test_boundary_input_validation_case_113 -> PASSED in 0.01s
+[2026-08-10 14:02:44] [INFO] Running test: [Form Input Validation Boundaries] test_boundary_input_validation_case_114
+[2026-08-10 14:02:44] [INFO] [Form Input Validation Boundaries] test_boundary_input_validation_case_114 -> PASSED in 0.01s
+[2026-08-10 14:02:44] [INFO] Running test: [Form Input Validation Boundaries] test_boundary_input_validation_case_115
+[2026-08-10 14:02:44] [INFO] [Form Input Validation Boundaries] test_boundary_input_validation_case_115 -> PASSED in 0.02s
+[2026-08-10 14:02:44] [INFO] Running test: [Form Input Validation Boundaries] test_boundary_input_validation_case_116
+[2026-08-10 14:02:44] [INFO] [Form Input Validation Boundaries] test_boundary_input_validation_case_116 -> PASSED in 0.01s
+[2026-08-10 14:02:44] [INFO] Running test: [Form Input Validation Boundaries] test_boundary_input_validation_case_117
+[2026-08-10 14:02:44] [INFO] [Form Input Validation Boundaries] test_boundary_input_validation_case_117 -> PASSED in 0.01s
+[2026-08-10 14:02:44] [INFO] Running test: [Form Input Validation Boundaries] test_boundary_input_validation_case_118
+[2026-08-10 14:02:44] [INFO] [Form Input Validation Boundaries] test_boundary_input_validation_case_118 -> PASSED in 0.01s
+[2026-08-10 14:02:44] [INFO] Running test: [Form Input Validation Boundaries] test_boundary_input_validation_case_119
+[2026-08-10 14:02:44] [INFO] [Form Input Validation Boundaries] test_boundary_input_validation_case_119 -> PASSED in 0.01s
+[2026-08-10 14:02:44] [INFO] Running test: [Form Input Validation Boundaries] test_boundary_input_validation_case_120
+[2026-08-10 14:02:44] [INFO] [Form Input Validation Boundaries] test_boundary_input_validation_case_120 -> PASSED in 0.01s
+[2026-08-10 14:02:44] [INFO] Running test: [Form Input Validation Boundaries] test_boundary_input_validation_case_121
+[2026-08-10 14:02:44] [INFO] [Form Input Validation Boundaries] test_boundary_input_validation_case_121 -> PASSED in 0.01s
+[2026-08-10 14:02:44] [INFO] Running test: [Form Input Validation Boundaries] test_boundary_input_validation_case_122
+[2026-08-10 14:02:44] [INFO] [Form Input Validation Boundaries] test_boundary_input_validation_case_122 -> PASSED in 0.01s
+[2026-08-10 14:02:44] [INFO] Running test: [Form Input Validation Boundaries] test_boundary_input_validation_case_123
+[2026-08-10 14:02:44] [INFO] [Form Input Validation Boundaries] test_boundary_input_validation_case_123 -> PASSED in 0.01s
+[2026-08-10 14:02:44] [INFO] Running test: [Form Input Validation Boundaries] test_boundary_input_validation_case_124
+[2026-08-10 14:02:44] [INFO] [Form Input Validation Boundaries] test_boundary_input_validation_case_124 -> PASSED in 0.01s
+[2026-08-10 14:02:44] [INFO] Running test: [Form Input Validation Boundaries] test_boundary_input_validation_case_125
+[2026-08-10 14:02:44] [INFO] [Form Input Validation Boundaries] test_boundary_input_validation_case_125 -> PASSED in 0.02s
+[2026-08-10 14:02:44] [INFO] Running test: [Form Input Validation Boundaries] test_boundary_input_validation_case_126
+[2026-08-10 14:02:44] [INFO] [Form Input Validation Boundaries] test_boundary_input_validation_case_126 -> PASSED in 0.02s
+[2026-08-10 14:02:44] [INFO] Running test: [Form Input Validation Boundaries] test_boundary_input_validation_case_127
+[2026-08-10 14:02:44] [INFO] [Form Input Validation Boundaries] test_boundary_input_validation_case_127 -> PASSED in 0.01s
+[2026-08-10 14:02:44] [INFO] Running test: [Form Input Validation Boundaries] test_boundary_input_validation_case_128
+[2026-08-10 14:02:44] [INFO] [Form Input Validation Boundaries] test_boundary_input_validation_case_128 -> PASSED in 0.01s
+[2026-08-10 14:02:44] [INFO] Running test: [Form Input Validation Boundaries] test_boundary_input_validation_case_129
+[2026-08-10 14:02:44] [INFO] [Form Input Validation Boundaries] test_boundary_input_validation_case_129 -> PASSED in 0.01s
+[2026-08-10 14:02:44] [INFO] Running test: [Form Input Validation Boundaries] test_boundary_input_validation_case_130
+[2026-08-10 14:02:44] [INFO] [Form Input Validation Boundaries] test_boundary_input_validation_case_130 -> PASSED in 0.01s
+[2026-08-10 14:02:44] [INFO] Running test: [Form Input Validation Boundaries] test_boundary_input_validation_case_131
+[2026-08-10 14:02:44] [INFO] [Form Input Validation Boundaries] test_boundary_input_validation_case_131 -> PASSED in 0.01s
+[2026-08-10 14:02:44] [INFO] Running test: [Form Input Validation Boundaries] test_boundary_input_validation_case_132
+[2026-08-10 14:02:44] [INFO] [Form Input Validation Boundaries] test_boundary_input_validation_case_132 -> PASSED in 0.01s
+[2026-08-10 14:02:44] [INFO] Running test: [Form Input Validation Boundaries] test_boundary_input_validation_case_133
+[2026-08-10 14:02:44] [INFO] [Form Input Validation Boundaries] test_boundary_input_validation_case_133 -> PASSED in 0.01s
+[2026-08-10 14:02:44] [INFO] Running test: [Form Input Validation Boundaries] test_boundary_input_validation_case_134
+[2026-08-10 14:02:44] [INFO] [Form Input Validation Boundaries] test_boundary_input_validation_case_134 -> PASSED in 0.01s
+[2026-08-10 14:02:44] [INFO] Running test: [Form Input Validation Boundaries] test_boundary_input_validation_case_135
+[2026-08-10 14:02:44] [INFO] [Form Input Validation Boundaries] test_boundary_input_validation_case_135 -> PASSED in 0.01s
+[2026-08-10 14:02:44] [INFO] Running test: [Form Input Validation Boundaries] test_boundary_input_validation_case_136
+[2026-08-10 14:02:44] [INFO] [Form Input Validation Boundaries] test_boundary_input_validation_case_136 -> PASSED in 0.01s
+[2026-08-10 14:02:44] [INFO] Running test: [Form Input Validation Boundaries] test_boundary_input_validation_case_137
+[2026-08-10 14:02:44] [INFO] [Form Input Validation Boundaries] test_boundary_input_validation_case_137 -> PASSED in 0.01s
+[2026-08-10 14:02:44] [INFO] Running test: [Form Input Validation Boundaries] test_boundary_input_validation_case_138
+[2026-08-10 14:02:44] [INFO] [Form Input Validation Boundaries] test_boundary_input_validation_case_138 -> PASSED in 0.01s
+[2026-08-10 14:02:44] [INFO] Running test: [Form Input Validation Boundaries] test_boundary_input_validation_case_139
+[2026-08-10 14:02:44] [INFO] [Form Input Validation Boundaries] test_boundary_input_validation_case_139 -> PASSED in 0.01s
+[2026-08-10 14:02:44] [INFO] Running test: [Form Input Validation Boundaries] test_boundary_input_validation_case_140
+[2026-08-10 14:02:44] [INFO] [Form Input Validation Boundaries] test_boundary_input_validation_case_140 -> PASSED in 0.01s
+[2026-08-10 14:02:44] [INFO] Running test: [Form Input Validation Boundaries] test_boundary_input_validation_case_141
+[2026-08-10 14:02:44] [INFO] [Form Input Validation Boundaries] test_boundary_input_validation_case_141 -> PASSED in 0.01s
+[2026-08-10 14:02:44] [INFO] Running test: [Form Input Validation Boundaries] test_boundary_input_validation_case_142
+[2026-08-10 14:02:44] [INFO] [Form Input Validation Boundaries] test_boundary_input_validation_case_142 -> PASSED in 0.01s
+[2026-08-10 14:02:44] [INFO] Running test: [Form Input Validation Boundaries] test_boundary_input_validation_case_143
+[2026-08-10 14:02:45] [INFO] [Form Input Validation Boundaries] test_boundary_input_validation_case_143 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [Form Input Validation Boundaries] test_boundary_input_validation_case_144
+[2026-08-10 14:02:45] [INFO] [Form Input Validation Boundaries] test_boundary_input_validation_case_144 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [Form Input Validation Boundaries] test_boundary_input_validation_case_145
+[2026-08-10 14:02:45] [INFO] [Form Input Validation Boundaries] test_boundary_input_validation_case_145 -> PASSED in 0.02s
+[2026-08-10 14:02:45] [INFO] Running test: [UI Styling & CSS Verification] test_ui_styling_css_property_146
+[2026-08-10 14:02:45] [INFO] [UI Styling & CSS Verification] test_ui_styling_css_property_146 -> PASSED in 0.02s
+[2026-08-10 14:02:45] [INFO] Running test: [UI Styling & CSS Verification] test_ui_styling_css_property_147
+[2026-08-10 14:02:45] [INFO] [UI Styling & CSS Verification] test_ui_styling_css_property_147 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [UI Styling & CSS Verification] test_ui_styling_css_property_148
+[2026-08-10 14:02:45] [INFO] [UI Styling & CSS Verification] test_ui_styling_css_property_148 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [UI Styling & CSS Verification] test_ui_styling_css_property_149
+[2026-08-10 14:02:45] [INFO] [UI Styling & CSS Verification] test_ui_styling_css_property_149 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [UI Styling & CSS Verification] test_ui_styling_css_property_150
+[2026-08-10 14:02:45] [INFO] [UI Styling & CSS Verification] test_ui_styling_css_property_150 -> PASSED in 0.04s
+[2026-08-10 14:02:45] [INFO] Running test: [UI Styling & CSS Verification] test_ui_styling_css_property_151
+[2026-08-10 14:02:45] [INFO] [UI Styling & CSS Verification] test_ui_styling_css_property_151 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [UI Styling & CSS Verification] test_ui_styling_css_property_152
+[2026-08-10 14:02:45] [INFO] [UI Styling & CSS Verification] test_ui_styling_css_property_152 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [UI Styling & CSS Verification] test_ui_styling_css_property_153
+[2026-08-10 14:02:45] [INFO] [UI Styling & CSS Verification] test_ui_styling_css_property_153 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [UI Styling & CSS Verification] test_ui_styling_css_property_154
+[2026-08-10 14:02:45] [INFO] [UI Styling & CSS Verification] test_ui_styling_css_property_154 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [UI Styling & CSS Verification] test_ui_styling_css_property_155
+[2026-08-10 14:02:45] [INFO] [UI Styling & CSS Verification] test_ui_styling_css_property_155 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [UI Styling & CSS Verification] test_ui_styling_css_property_156
+[2026-08-10 14:02:45] [INFO] [UI Styling & CSS Verification] test_ui_styling_css_property_156 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [UI Styling & CSS Verification] test_ui_styling_css_property_157
+[2026-08-10 14:02:45] [INFO] [UI Styling & CSS Verification] test_ui_styling_css_property_157 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [UI Styling & CSS Verification] test_ui_styling_css_property_158
+[2026-08-10 14:02:45] [INFO] [UI Styling & CSS Verification] test_ui_styling_css_property_158 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [UI Styling & CSS Verification] test_ui_styling_css_property_159
+[2026-08-10 14:02:45] [INFO] [UI Styling & CSS Verification] test_ui_styling_css_property_159 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [UI Styling & CSS Verification] test_ui_styling_css_property_160
+[2026-08-10 14:02:45] [INFO] [UI Styling & CSS Verification] test_ui_styling_css_property_160 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [UI Styling & CSS Verification] test_ui_styling_css_property_161
+[2026-08-10 14:02:45] [INFO] [UI Styling & CSS Verification] test_ui_styling_css_property_161 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [UI Styling & CSS Verification] test_ui_styling_css_property_162
+[2026-08-10 14:02:45] [INFO] [UI Styling & CSS Verification] test_ui_styling_css_property_162 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [UI Styling & CSS Verification] test_ui_styling_css_property_163
+[2026-08-10 14:02:45] [INFO] [UI Styling & CSS Verification] test_ui_styling_css_property_163 -> PASSED in 0.02s
+[2026-08-10 14:02:45] [INFO] Running test: [UI Styling & CSS Verification] test_ui_styling_css_property_164
+[2026-08-10 14:02:45] [INFO] [UI Styling & CSS Verification] test_ui_styling_css_property_164 -> PASSED in 0.02s
+[2026-08-10 14:02:45] [INFO] Running test: [UI Styling & CSS Verification] test_ui_styling_css_property_165
+[2026-08-10 14:02:45] [INFO] [UI Styling & CSS Verification] test_ui_styling_css_property_165 -> PASSED in 0.04s
+[2026-08-10 14:02:45] [INFO] Running test: [UI Styling & CSS Verification] test_ui_styling_css_property_166
+[2026-08-10 14:02:45] [INFO] [UI Styling & CSS Verification] test_ui_styling_css_property_166 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [UI Styling & CSS Verification] test_ui_styling_css_property_167
+[2026-08-10 14:02:45] [INFO] [UI Styling & CSS Verification] test_ui_styling_css_property_167 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [UI Styling & CSS Verification] test_ui_styling_css_property_168
+[2026-08-10 14:02:45] [INFO] [UI Styling & CSS Verification] test_ui_styling_css_property_168 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [UI Styling & CSS Verification] test_ui_styling_css_property_169
+[2026-08-10 14:02:45] [INFO] [UI Styling & CSS Verification] test_ui_styling_css_property_169 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [UI Styling & CSS Verification] test_ui_styling_css_property_170
+[2026-08-10 14:02:45] [INFO] [UI Styling & CSS Verification] test_ui_styling_css_property_170 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [UI Styling & CSS Verification] test_ui_styling_css_property_171
+[2026-08-10 14:02:45] [INFO] [UI Styling & CSS Verification] test_ui_styling_css_property_171 -> PASSED in 0.02s
+[2026-08-10 14:02:45] [INFO] Running test: [UI Styling & CSS Verification] test_ui_styling_css_property_172
+[2026-08-10 14:02:45] [INFO] [UI Styling & CSS Verification] test_ui_styling_css_property_172 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [UI Styling & CSS Verification] test_ui_styling_css_property_173
+[2026-08-10 14:02:45] [INFO] [UI Styling & CSS Verification] test_ui_styling_css_property_173 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [UI Styling & CSS Verification] test_ui_styling_css_property_174
+[2026-08-10 14:02:45] [INFO] [UI Styling & CSS Verification] test_ui_styling_css_property_174 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [UI Styling & CSS Verification] test_ui_styling_css_property_175
+[2026-08-10 14:02:45] [INFO] [UI Styling & CSS Verification] test_ui_styling_css_property_175 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [UI Styling & CSS Verification] test_ui_styling_css_property_176
+[2026-08-10 14:02:45] [INFO] [UI Styling & CSS Verification] test_ui_styling_css_property_176 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [UI Styling & CSS Verification] test_ui_styling_css_property_177
+[2026-08-10 14:02:45] [INFO] [UI Styling & CSS Verification] test_ui_styling_css_property_177 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [UI Styling & CSS Verification] test_ui_styling_css_property_178
+[2026-08-10 14:02:45] [INFO] [UI Styling & CSS Verification] test_ui_styling_css_property_178 -> PASSED in 0.02s
+[2026-08-10 14:02:45] [INFO] Running test: [UI Styling & CSS Verification] test_ui_styling_css_property_179
+[2026-08-10 14:02:45] [INFO] [UI Styling & CSS Verification] test_ui_styling_css_property_179 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [UI Styling & CSS Verification] test_ui_styling_css_property_180
+[2026-08-10 14:02:45] [INFO] [UI Styling & CSS Verification] test_ui_styling_css_property_180 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [UI Styling & CSS Verification] test_ui_styling_css_property_181
+[2026-08-10 14:02:45] [INFO] [UI Styling & CSS Verification] test_ui_styling_css_property_181 -> PASSED in 0.02s
+[2026-08-10 14:02:45] [INFO] Running test: [UI Styling & CSS Verification] test_ui_styling_css_property_182
+[2026-08-10 14:02:45] [INFO] [UI Styling & CSS Verification] test_ui_styling_css_property_182 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [UI Styling & CSS Verification] test_ui_styling_css_property_183
+[2026-08-10 14:02:45] [INFO] [UI Styling & CSS Verification] test_ui_styling_css_property_183 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [UI Styling & CSS Verification] test_ui_styling_css_property_184
+[2026-08-10 14:02:45] [INFO] [UI Styling & CSS Verification] test_ui_styling_css_property_184 -> PASSED in 0.03s
+[2026-08-10 14:02:45] [INFO] Running test: [UI Styling & CSS Verification] test_ui_styling_css_property_185
+[2026-08-10 14:02:45] [INFO] [UI Styling & CSS Verification] test_ui_styling_css_property_185 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_186
+[2026-08-10 14:02:45] [INFO] [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_186 -> PASSED in 0.00s
+[2026-08-10 14:02:45] [INFO] Running test: [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_187
+[2026-08-10 14:02:45] [INFO] [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_187 -> PASSED in 0.00s
+[2026-08-10 14:02:45] [INFO] Running test: [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_188
+[2026-08-10 14:02:45] [INFO] [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_188 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_189
+[2026-08-10 14:02:45] [INFO] [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_189 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_190
+[2026-08-10 14:02:45] [INFO] [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_190 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_191
+[2026-08-10 14:02:45] [INFO] [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_191 -> PASSED in 0.00s
+[2026-08-10 14:02:45] [INFO] Running test: [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_192
+[2026-08-10 14:02:45] [INFO] [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_192 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_193
+[2026-08-10 14:02:45] [INFO] [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_193 -> PASSED in 0.00s
+[2026-08-10 14:02:45] [INFO] Running test: [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_194
+[2026-08-10 14:02:45] [INFO] [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_194 -> PASSED in 0.00s
+[2026-08-10 14:02:45] [INFO] Running test: [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_195
+[2026-08-10 14:02:45] [INFO] [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_195 -> PASSED in 0.00s
+[2026-08-10 14:02:45] [INFO] Running test: [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_196
+[2026-08-10 14:02:45] [INFO] [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_196 -> PASSED in 0.00s
+[2026-08-10 14:02:45] [INFO] Running test: [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_197
+[2026-08-10 14:02:45] [INFO] [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_197 -> PASSED in 0.00s
+[2026-08-10 14:02:45] [INFO] Running test: [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_198
+[2026-08-10 14:02:45] [INFO] [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_198 -> PASSED in 0.00s
+[2026-08-10 14:02:45] [INFO] Running test: [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_199
+[2026-08-10 14:02:45] [INFO] [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_199 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_200
+[2026-08-10 14:02:45] [INFO] [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_200 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_201
+[2026-08-10 14:02:45] [INFO] [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_201 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_202
+[2026-08-10 14:02:45] [INFO] [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_202 -> PASSED in 0.00s
+[2026-08-10 14:02:45] [INFO] Running test: [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_203
+[2026-08-10 14:02:45] [INFO] [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_203 -> PASSED in 0.00s
+[2026-08-10 14:02:45] [INFO] Running test: [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_204
+[2026-08-10 14:02:45] [INFO] [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_204 -> PASSED in 0.00s
+[2026-08-10 14:02:45] [INFO] Running test: [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_205
+[2026-08-10 14:02:45] [INFO] [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_205 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_206
+[2026-08-10 14:02:45] [INFO] [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_206 -> PASSED in 0.00s
+[2026-08-10 14:02:45] [INFO] Running test: [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_207
+[2026-08-10 14:02:45] [INFO] [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_207 -> PASSED in 0.00s
+[2026-08-10 14:02:45] [INFO] Running test: [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_208
+[2026-08-10 14:02:45] [INFO] [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_208 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_209
+[2026-08-10 14:02:45] [INFO] [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_209 -> PASSED in 0.00s
+[2026-08-10 14:02:45] [INFO] Running test: [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_210
+[2026-08-10 14:02:45] [INFO] [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_210 -> PASSED in 0.00s
+[2026-08-10 14:02:45] [INFO] Running test: [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_211
+[2026-08-10 14:02:45] [INFO] [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_211 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_212
+[2026-08-10 14:02:45] [INFO] [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_212 -> PASSED in 0.00s
+[2026-08-10 14:02:45] [INFO] Running test: [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_213
+[2026-08-10 14:02:45] [INFO] [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_213 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_214
+[2026-08-10 14:02:45] [INFO] [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_214 -> PASSED in 0.00s
+[2026-08-10 14:02:45] [INFO] Running test: [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_215
+[2026-08-10 14:02:45] [INFO] [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_215 -> PASSED in 0.00s
+[2026-08-10 14:02:45] [INFO] Running test: [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_216
+[2026-08-10 14:02:45] [INFO] [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_216 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_217
+[2026-08-10 14:02:45] [INFO] [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_217 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_218
+[2026-08-10 14:02:45] [INFO] [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_218 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_219
+[2026-08-10 14:02:45] [INFO] [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_219 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_220
+[2026-08-10 14:02:45] [INFO] [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_220 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_221
+[2026-08-10 14:02:45] [INFO] [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_221 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_222
+[2026-08-10 14:02:45] [INFO] [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_222 -> PASSED in 0.00s
+[2026-08-10 14:02:45] [INFO] Running test: [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_223
+[2026-08-10 14:02:45] [INFO] [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_223 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_224
+[2026-08-10 14:02:45] [INFO] [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_224 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_225
+[2026-08-10 14:02:45] [INFO] [Navigation & Breadcrumbs] test_navigation_breadcrumb_element_225 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [Dynamic Theme Rendering] test_dynamic_theme_class_verification_226
+[2026-08-10 14:02:45] [INFO] [Dynamic Theme Rendering] test_dynamic_theme_class_verification_226 -> PASSED in 0.02s
+[2026-08-10 14:02:45] [INFO] Running test: [Dynamic Theme Rendering] test_dynamic_theme_class_verification_227
+[2026-08-10 14:02:45] [INFO] [Dynamic Theme Rendering] test_dynamic_theme_class_verification_227 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [Dynamic Theme Rendering] test_dynamic_theme_class_verification_228
+[2026-08-10 14:02:45] [INFO] [Dynamic Theme Rendering] test_dynamic_theme_class_verification_228 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [Dynamic Theme Rendering] test_dynamic_theme_class_verification_229
+[2026-08-10 14:02:45] [INFO] [Dynamic Theme Rendering] test_dynamic_theme_class_verification_229 -> PASSED in 0.03s
+[2026-08-10 14:02:45] [INFO] Running test: [Dynamic Theme Rendering] test_dynamic_theme_class_verification_230
+[2026-08-10 14:02:45] [INFO] [Dynamic Theme Rendering] test_dynamic_theme_class_verification_230 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [Dynamic Theme Rendering] test_dynamic_theme_class_verification_231
+[2026-08-10 14:02:45] [INFO] [Dynamic Theme Rendering] test_dynamic_theme_class_verification_231 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [Dynamic Theme Rendering] test_dynamic_theme_class_verification_232
+[2026-08-10 14:02:45] [INFO] [Dynamic Theme Rendering] test_dynamic_theme_class_verification_232 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [Dynamic Theme Rendering] test_dynamic_theme_class_verification_233
+[2026-08-10 14:02:45] [INFO] [Dynamic Theme Rendering] test_dynamic_theme_class_verification_233 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [Dynamic Theme Rendering] test_dynamic_theme_class_verification_234
+[2026-08-10 14:02:45] [INFO] [Dynamic Theme Rendering] test_dynamic_theme_class_verification_234 -> PASSED in 0.01s
+[2026-08-10 14:02:45] [INFO] Running test: [Dynamic Theme Rendering] test_dynamic_theme_class_verification_235
+[2026-08-10 14:02:46] [INFO] [Dynamic Theme Rendering] test_dynamic_theme_class_verification_235 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] Running test: [Dynamic Theme Rendering] test_dynamic_theme_class_verification_236
+[2026-08-10 14:02:46] [INFO] [Dynamic Theme Rendering] test_dynamic_theme_class_verification_236 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] Running test: [Dynamic Theme Rendering] test_dynamic_theme_class_verification_237
+[2026-08-10 14:02:46] [INFO] [Dynamic Theme Rendering] test_dynamic_theme_class_verification_237 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] Running test: [Dynamic Theme Rendering] test_dynamic_theme_class_verification_238
+[2026-08-10 14:02:46] [INFO] [Dynamic Theme Rendering] test_dynamic_theme_class_verification_238 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] Running test: [Dynamic Theme Rendering] test_dynamic_theme_class_verification_239
+[2026-08-10 14:02:46] [INFO] [Dynamic Theme Rendering] test_dynamic_theme_class_verification_239 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] Running test: [Dynamic Theme Rendering] test_dynamic_theme_class_verification_240
+[2026-08-10 14:02:46] [INFO] [Dynamic Theme Rendering] test_dynamic_theme_class_verification_240 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] Running test: [Dynamic Theme Rendering] test_dynamic_theme_class_verification_241
+[2026-08-10 14:02:46] [INFO] [Dynamic Theme Rendering] test_dynamic_theme_class_verification_241 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] Running test: [Dynamic Theme Rendering] test_dynamic_theme_class_verification_242
+[2026-08-10 14:02:46] [INFO] [Dynamic Theme Rendering] test_dynamic_theme_class_verification_242 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] Running test: [Dynamic Theme Rendering] test_dynamic_theme_class_verification_243
+[2026-08-10 14:02:46] [INFO] [Dynamic Theme Rendering] test_dynamic_theme_class_verification_243 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] Running test: [Dynamic Theme Rendering] test_dynamic_theme_class_verification_244
+[2026-08-10 14:02:46] [INFO] [Dynamic Theme Rendering] test_dynamic_theme_class_verification_244 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] Running test: [Dynamic Theme Rendering] test_dynamic_theme_class_verification_245
+[2026-08-10 14:02:46] [INFO] [Dynamic Theme Rendering] test_dynamic_theme_class_verification_245 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] Running test: [Dynamic Theme Rendering] test_dynamic_theme_class_verification_246
+[2026-08-10 14:02:46] [INFO] [Dynamic Theme Rendering] test_dynamic_theme_class_verification_246 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] Running test: [Dynamic Theme Rendering] test_dynamic_theme_class_verification_247
+[2026-08-10 14:02:46] [INFO] [Dynamic Theme Rendering] test_dynamic_theme_class_verification_247 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] Running test: [Dynamic Theme Rendering] test_dynamic_theme_class_verification_248
+[2026-08-10 14:02:46] [INFO] [Dynamic Theme Rendering] test_dynamic_theme_class_verification_248 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] Running test: [Dynamic Theme Rendering] test_dynamic_theme_class_verification_249
+[2026-08-10 14:02:46] [INFO] [Dynamic Theme Rendering] test_dynamic_theme_class_verification_249 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] Running test: [Dynamic Theme Rendering] test_dynamic_theme_class_verification_250
+[2026-08-10 14:02:46] [INFO] [Dynamic Theme Rendering] test_dynamic_theme_class_verification_250 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] Running test: [Dynamic Theme Rendering] test_dynamic_theme_class_verification_251
+[2026-08-10 14:02:46] [INFO] [Dynamic Theme Rendering] test_dynamic_theme_class_verification_251 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] Running test: [Dynamic Theme Rendering] test_dynamic_theme_class_verification_252
+[2026-08-10 14:02:46] [INFO] [Dynamic Theme Rendering] test_dynamic_theme_class_verification_252 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] Running test: [Dynamic Theme Rendering] test_dynamic_theme_class_verification_253
+[2026-08-10 14:02:46] [INFO] [Dynamic Theme Rendering] test_dynamic_theme_class_verification_253 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] Running test: [Dynamic Theme Rendering] test_dynamic_theme_class_verification_254
+[2026-08-10 14:02:46] [INFO] [Dynamic Theme Rendering] test_dynamic_theme_class_verification_254 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] Running test: [Dynamic Theme Rendering] test_dynamic_theme_class_verification_255
+[2026-08-10 14:02:46] [INFO] [Dynamic Theme Rendering] test_dynamic_theme_class_verification_255 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] Running test: [Dynamic Theme Rendering] test_dynamic_theme_class_verification_256
+[2026-08-10 14:02:46] [INFO] [Dynamic Theme Rendering] test_dynamic_theme_class_verification_256 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] Running test: [Dynamic Theme Rendering] test_dynamic_theme_class_verification_257
+[2026-08-10 14:02:46] [INFO] [Dynamic Theme Rendering] test_dynamic_theme_class_verification_257 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] Running test: [Dynamic Theme Rendering] test_dynamic_theme_class_verification_258
+[2026-08-10 14:02:46] [INFO] [Dynamic Theme Rendering] test_dynamic_theme_class_verification_258 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] Running test: [Dynamic Theme Rendering] test_dynamic_theme_class_verification_259
+[2026-08-10 14:02:46] [INFO] [Dynamic Theme Rendering] test_dynamic_theme_class_verification_259 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] Running test: [Dynamic Theme Rendering] test_dynamic_theme_class_verification_260
+[2026-08-10 14:02:46] [INFO] [Dynamic Theme Rendering] test_dynamic_theme_class_verification_260 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] Running test: [Dynamic Theme Rendering] test_dynamic_theme_class_verification_261
+[2026-08-10 14:02:46] [INFO] [Dynamic Theme Rendering] test_dynamic_theme_class_verification_261 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] Running test: [Dynamic Theme Rendering] test_dynamic_theme_class_verification_262
+[2026-08-10 14:02:46] [INFO] [Dynamic Theme Rendering] test_dynamic_theme_class_verification_262 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] Running test: [Dynamic Theme Rendering] test_dynamic_theme_class_verification_263
+[2026-08-10 14:02:46] [INFO] [Dynamic Theme Rendering] test_dynamic_theme_class_verification_263 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] Running test: [Dynamic Theme Rendering] test_dynamic_theme_class_verification_264
+[2026-08-10 14:02:46] [INFO] [Dynamic Theme Rendering] test_dynamic_theme_class_verification_264 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] Running test: [Dynamic Theme Rendering] test_dynamic_theme_class_verification_265
+[2026-08-10 14:02:46] [INFO] [Dynamic Theme Rendering] test_dynamic_theme_class_verification_265 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] Running test: [State & Context Integrity] test_state_context_integrity_check_266
+[2026-08-10 14:02:46] [INFO] [State & Context Integrity] test_state_context_integrity_check_266 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] Running test: [State & Context Integrity] test_state_context_integrity_check_267
+[2026-08-10 14:02:46] [INFO] [State & Context Integrity] test_state_context_integrity_check_267 -> PASSED in 0.00s
+[2026-08-10 14:02:46] [INFO] Running test: [State & Context Integrity] test_state_context_integrity_check_268
+[2026-08-10 14:02:46] [INFO] [State & Context Integrity] test_state_context_integrity_check_268 -> PASSED in 0.00s
+[2026-08-10 14:02:46] [INFO] Running test: [State & Context Integrity] test_state_context_integrity_check_269
+[2026-08-10 14:02:46] [INFO] [State & Context Integrity] test_state_context_integrity_check_269 -> PASSED in 0.00s
+[2026-08-10 14:02:46] [INFO] Running test: [State & Context Integrity] test_state_context_integrity_check_270
+[2026-08-10 14:02:46] [INFO] [State & Context Integrity] test_state_context_integrity_check_270 -> PASSED in 0.00s
+[2026-08-10 14:02:46] [INFO] Running test: [State & Context Integrity] test_state_context_integrity_check_271
+[2026-08-10 14:02:46] [INFO] [State & Context Integrity] test_state_context_integrity_check_271 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] Running test: [State & Context Integrity] test_state_context_integrity_check_272
+[2026-08-10 14:02:46] [INFO] [State & Context Integrity] test_state_context_integrity_check_272 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] Running test: [State & Context Integrity] test_state_context_integrity_check_273
+[2026-08-10 14:02:46] [INFO] [State & Context Integrity] test_state_context_integrity_check_273 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] Running test: [State & Context Integrity] test_state_context_integrity_check_274
+[2026-08-10 14:02:46] [INFO] [State & Context Integrity] test_state_context_integrity_check_274 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] Running test: [State & Context Integrity] test_state_context_integrity_check_275
+[2026-08-10 14:02:46] [INFO] [State & Context Integrity] test_state_context_integrity_check_275 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] Running test: [State & Context Integrity] test_state_context_integrity_check_276
+[2026-08-10 14:02:46] [INFO] [State & Context Integrity] test_state_context_integrity_check_276 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] Running test: [State & Context Integrity] test_state_context_integrity_check_277
+[2026-08-10 14:02:46] [INFO] [State & Context Integrity] test_state_context_integrity_check_277 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] Running test: [State & Context Integrity] test_state_context_integrity_check_278
+[2026-08-10 14:02:46] [INFO] [State & Context Integrity] test_state_context_integrity_check_278 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] Running test: [State & Context Integrity] test_state_context_integrity_check_279
+[2026-08-10 14:02:46] [INFO] [State & Context Integrity] test_state_context_integrity_check_279 -> PASSED in 0.00s
+[2026-08-10 14:02:46] [INFO] Running test: [State & Context Integrity] test_state_context_integrity_check_280
+[2026-08-10 14:02:46] [INFO] [State & Context Integrity] test_state_context_integrity_check_280 -> PASSED in 0.00s
+[2026-08-10 14:02:46] [INFO] Running test: [State & Context Integrity] test_state_context_integrity_check_281
+[2026-08-10 14:02:46] [INFO] [State & Context Integrity] test_state_context_integrity_check_281 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] Running test: [State & Context Integrity] test_state_context_integrity_check_282
+[2026-08-10 14:02:46] [INFO] [State & Context Integrity] test_state_context_integrity_check_282 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] Running test: [State & Context Integrity] test_state_context_integrity_check_283
+[2026-08-10 14:02:46] [INFO] [State & Context Integrity] test_state_context_integrity_check_283 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] Running test: [State & Context Integrity] test_state_context_integrity_check_284
+[2026-08-10 14:02:46] [INFO] [State & Context Integrity] test_state_context_integrity_check_284 -> PASSED in 0.01s
+[2026-08-10 14:02:46] [INFO] E2E Test Execution finished successfully.
+[2026-08-10 14:02:46] [INFO] Tearing down test environment...
+[2026-08-10 14:02:46] [INFO] Processes shut down successfully.
+[2026-08-10 14:02:46] [INFO] Generating E2E Reports...

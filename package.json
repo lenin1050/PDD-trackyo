@@ -1,0 +1,16 @@
+{
+  "name": "trackyo-workspace",
+  "version": "1.0.0",
+  "description": "Workspace manager for Trackyo Expense Tracker",
+  "scripts": {
+    "install:all": "npm install && npm install --prefix trackyo_website/backend && npm install --prefix trackyo_website/frontend && npm install --prefix trackyo_website/backend/selenium-tests && npm install --prefix appium-tests",
+    "dev:backend": "npm run dev --prefix trackyo_website/backend",
+    "dev:frontend": "npm run dev --prefix trackyo_website/frontend",
+    "dev": "npx concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "test:selenium": "npm run test --prefix trackyo_website/backend/selenium-tests",
+    "test:appium": "npm run test --prefix appium-tests"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

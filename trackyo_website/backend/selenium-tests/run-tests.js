@@ -9,15 +9,25 @@ const { MongoMemoryServer } = require('mongodb-memory-server');
 const testCases = require('./test-cases');
 const { generateReport } = require('./report-generator');
 
-// Output report filename
-const timestamp = new Date().toISOString().replace(/[:.]/g, '-').substring(0, 19);
-const outputFilename = `E2E_Test_Report_Trackyo_${timestamp}.xlsx`;
+// Output report directory and path setup
+const testResultsDir = path.resolve(__dirname, '..', '..', '..', 'Test Results');
+const excelDir = path.join(testResultsDir, 'Excel');
+const htmlDir = path.join(testResultsDir, 'HTML');
+const screenshotsDir = path.join(testResultsDir, 'Screenshots');
+const logsDir = path.join(testResultsDir, 'Logs');
+const summaryDir = path.join(testResultsDir, 'Summary');
 
-let outputDir = 'c:\\Users\\noname\\Downloads';
-if (process.env.CI || !fs.existsSync(outputDir)) {
-  outputDir = __dirname;
-}
-const outputPath = path.join(outputDir, outputFilename);
+// Make sure output directories exist
+fs.mkdirSync(excelDir, { recursive: true });
+fs.mkdirSync(htmlDir, { recursive: true });
+fs.mkdirSync(screenshotsDir, { recursive: true });
+fs.mkdirSync(logsDir, { recursive: true });
+fs.mkdirSync(summaryDir, { recursive: true });
+
+const outputPath = path.join(excelDir, 'Automation_Test_Report.xlsx');
+const outputHtmlPath = path.join(htmlDir, 'execution-report.html');
+const outputSummaryPath = path.join(summaryDir, 'summary.md');
+const outputLogPath = path.join(logsDir, 'execution-log.log');
 
 let mongodServer = null;
 let backendProcess = null;
@@ -129,8 +139,9 @@ async function main() {
       .build();
     await driver.manage().window().setRect({ width: 1280, height: 800 });
 
-    logMessage('INFO', 'Selenium Chrome session established. Navigating to http://localhost:5173/');
-    await driver.get('http://localhost:5173/');
+    const baseUrl = process.env.BASE_URL || 'http://localhost:5173/';
+    logMessage('INFO', `Selenium Chrome session established. Navigating to ${baseUrl}`);
+    await driver.get(baseUrl);
 
     // 6. Run all 105 Test Cases
     const context = {
@@ -169,6 +180,19 @@ async function main() {
           error: err.stack || err.message
         });
         logMessage('ERROR', `[${testCase.category}] ${testCase.name} -> FAILED: ${err.message}`);
+        
+        // Capture screenshot of failure
+        if (driver) {
+          try {
+            const screenshot = await driver.takeScreenshot();
+            const screenshotName = `${testCase.name}_failed.png`;
+            const screenshotPath = path.join(screenshotsDir, screenshotName);
+            fs.writeFileSync(screenshotPath, screenshot, 'base64');
+            logMessage('INFO', `Screenshot captured for failed test: ${screenshotPath}`);
+          } catch (screenshotErr) {
+            logMessage('ERROR', `Failed to capture screenshot: ${screenshotErr.message}`);
+          }
+        }
       }
     }
 
@@ -193,16 +217,287 @@ async function main() {
     }
     logMessage('INFO', 'Processes shut down successfully.');
 
-    // 8. Generate Excel report
+    // 8. Generate reports
     const endTime = new Date();
-    logMessage('INFO', 'Generating E2E Excel Report...');
+    logMessage('INFO', 'Generating E2E Reports...');
+    
+    // Save text log file
+    try {
+      const logLines = logs.map(l => `[${l.timestamp.toISOString().replace('T', ' ').substring(0, 19)}] [${l.level}] ${l.message}`).join('\n');
+      fs.writeFileSync(outputLogPath, logLines, 'utf8');
+      logMessage('INFO', `Text execution log saved to: ${outputLogPath}`);
+    } catch (logError) {
+      console.error('Failed to write log file: ', logError);
+    }
+
+    // Generate Excel report
     try {
       await generateReport(results, logs, startTime, endTime, outputPath);
       logMessage('INFO', `E2E Excel report saved to: ${outputPath}`);
     } catch (excelError) {
-      console.error('Failed to create report: ', excelError);
+      console.error('Failed to create Excel report: ', excelError);
+    }
+
+    // Generate HTML report
+    try {
+      generateHtmlReport(results, logs, startTime, endTime, outputHtmlPath);
+      logMessage('INFO', `E2E HTML report saved to: ${outputHtmlPath}`);
+    } catch (htmlError) {
+      console.error('Failed to create HTML report: ', htmlError);
+    }
+
+    // Generate Summary markdown
+    try {
+      generateSummaryMarkdown(results, startTime, endTime, outputSummaryPath);
+      logMessage('INFO', `E2E Summary markdown saved to: ${outputSummaryPath}`);
+    } catch (summaryError) {
+      console.error('Failed to create Summary markdown: ', summaryError);
     }
   }
+}
+
+function generateHtmlReport(results, logs, startTime, endTime, outputHtmlPath) {
+  const total = results.length;
+  const passed = results.filter(r => r.status === 'PASSED').length;
+  const failed = results.filter(r => r.status === 'FAILED').length;
+  const skipped = results.filter(r => r.status === 'SKIPPED').length;
+  const passRate = total > 0 ? ((passed / total) * 100).toFixed(1) : '0.0';
+  const duration = ((endTime - startTime) / 1000).toFixed(1);
+
+  let testRows = '';
+  results.forEach(r => {
+    const statusClass = r.status === 'PASSED' ? 'status-passed' : 'status-failed';
+    const errHtml = r.error ? `<div class="error-details">${escapeHtml(r.error)}</div>` : '';
+    testRows += `
+      <tr class="${statusClass}">
+        <td>${r.id}</td>
+        <td>${escapeHtml(r.category)}</td>
+        <td><strong>${escapeHtml(r.name)}</strong></td>
+        <td>${r.status}</td>
+        <td>${r.duration}ms</td>
+        <td>${errHtml}</td>
+      </tr>
+    `;
+  });
+
+  let logRows = '';
+  logs.forEach(l => {
+    const levelClass = l.level === 'ERROR' ? 'log-error' : 'log-info';
+    logRows += `
+      <div class="log-item ${levelClass}">
+        <span class="log-ts">[${l.timestamp.toISOString().replace('T', ' ').substring(0, 19)}]</span>
+        <span class="log-level">[${l.level}]</span>
+        <span class="log-msg">${escapeHtml(l.message)}</span>
+      </div>
+    `;
+  });
+
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trackyo Automation Test Execution Report</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: #0f172a;
+      color: #e2e8f0;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    header {
+      border-bottom: 1px solid #334155;
+      padding-bottom: 20px;
+      margin-bottom: 30px;
+    }
+    h1 {
+      margin: 0 0 10px 0;
+      color: #38bdf8;
+    }
+    .meta {
+      font-size: 0.9rem;
+      color: #94a3b8;
+    }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    .card {
+      background-color: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+    }
+    .card h3 {
+      margin: 0 0 10px 0;
+      font-size: 1rem;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .card .val {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+    .card.pass { border-color: #22c55e; color: #4ade80; }
+    .card.fail { border-color: #ef4444; color: #f87171; }
+    .card.rate { border-color: #eab308; color: #facc15; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 40px;
+    }
+    th, td {
+      border: 1px solid #334155;
+      padding: 12px;
+      text-align: left;
+    }
+    th {
+      background-color: #1e293b;
+      color: #38bdf8;
+    }
+    tr.status-passed {
+      background-color: rgba(34, 197, 94, 0.05);
+    }
+    tr.status-failed {
+      background-color: rgba(239, 68, 68, 0.05);
+    }
+    .error-details {
+      color: #f87171;
+      font-family: monospace;
+      font-size: 0.85rem;
+      white-space: pre-wrap;
+      max-height: 100px;
+      overflow-y: auto;
+      margin-top: 5px;
+    }
+    .logs-panel {
+      background-color: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 20px;
+      max-height: 400px;
+      overflow-y: auto;
+      font-family: monospace;
+      font-size: 0.9rem;
+    }
+    .log-item {
+      margin-bottom: 5px;
+      line-height: 1.4;
+    }
+    .log-error { color: #f87171; }
+    .log-info { color: #38bdf8; }
+    .log-ts { color: #64748b; }
+    .log-level { font-weight: bold; margin: 0 5px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Trackyo E2E Automation Test Report</h1>
+      <div class="meta">
+        Run started: ${startTime.toLocaleString()} | Ended: ${endTime.toLocaleString()} | Total Duration: ${duration}s
+      </div>
+    </header>
+    
+    <div class="summary-grid">
+      <div class="card">
+        <h3>Total Tests</h3>
+        <div class="val">${total}</div>
+      </div>
+      <div class="card pass">
+        <h3>Passed</h3>
+        <div class="val">${passed}</div>
+      </div>
+      <div class="card fail">
+        <h3>Failed</h3>
+        <div class="val">${failed}</div>
+      </div>
+      <div class="card rate">
+        <h3>Pass Rate</h3>
+        <div class="val">${passRate}%</div>
+      </div>
+    </div>
+
+    <h2>Test Execution Details</h2>
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 50px;">ID</th>
+          <th style="width: 200px;">Category</th>
+          <th style="width: 300px;">Test Name</th>
+          <th style="width: 100px;">Status</th>
+          <th style="width: 100px;">Duration</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${testRows}
+      </tbody>
+    </table>
+
+    <h2>System Logs</h2>
+    <div class="logs-panel">
+      ${logRows}
+    </div>
+  </div>
+</body>
+</html>`;
+  fs.writeFileSync(outputHtmlPath, html, 'utf8');
+}
+
+function generateSummaryMarkdown(results, startTime, endTime, outputSummaryPath) {
+  const total = results.length;
+  const passed = results.filter(r => r.status === 'PASSED').length;
+  const failed = results.filter(r => r.status === 'FAILED').length;
+  const skipped = results.filter(r => r.status === 'SKIPPED').length;
+  const passRate = total > 0 ? ((passed / total) * 100).toFixed(1) : '0.0';
+  const baseUrl = process.env.BASE_URL || 'https://lenin1050.github.io/PDD-trackyo/';
+
+  let failedList = '';
+  const failedTests = results.filter(r => r.status === 'FAILED');
+  if (failedTests.length === 0) {
+    failedList = '*None*';
+  } else {
+    failedTests.forEach(t => {
+      failedList += `- **${t.name}** (${t.category})\n  *Reason:* ${t.error ? t.error.split('\n')[0] : 'Unknown error'}\n`;
+    });
+  }
+
+  const content = `# Live GitHub Pages E2E Test Summary
+
+**Deployment URL:** [${baseUrl}](${baseUrl})
+
+| Metric | Value |
+| --- | --- |
+| **Total Tests** | ${total} |
+| **Passed** | ${passed} |
+| **Failed** | ${failed} |
+| **Skipped** | ${skipped} |
+| **Pass Percentage** | ${passRate}% |
+
+### Failed Tests:
+${failedList}
+`;
+  fs.writeFileSync(outputSummaryPath, content, 'utf8');
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
 }
 
 main();

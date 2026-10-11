@@ -1,14 +1,14 @@
 # Trackyo Load Test Report
 
-**Build:** 8
-**Date:** 2026-10-04 09:01 UTC
+**Build:** 9
+**Date:** 2026-10-11 09:31 UTC
 **VUs:** 100
 **Duration:** 1m
 **Target URL:** https://trackyo-api.onrender.com
 
 ## Results
 ```
-time="2026-10-04T09:00:04Z" level=warning msg="\"env\" level configuration overrode scenarios configuration entirely"
+time="2026-10-11T09:30:43Z" level=warning msg="\"env\" level configuration overrode scenarios configuration entirely"
 
          /\      Grafana   /‾‾/  
     /\  /  \     |\  __   /  /   
@@ -24,20 +24,20 @@ time="2026-10-04T09:00:04Z" level=warning msg="\"env\" level configuration overr
      scenarios: (100.00%) 1 scenario, 100 max VUs, 1m30s max duration (incl. graceful stop):
               * default: 100 looping VUs for 1m0s (gracefulStop: 30s)
 
-time="2026-10-04T09:00:04Z" level=info msg="[SETUP] Registering 10 load test users at https://trackyo-api.onrender.com" source=console
-time="2026-10-04T09:00:04Z" level=warning msg="[SETUP] User loadtest_0@trackyo.test setup failed: 404 Not Found\n" source=console
-time="2026-10-04T09:00:05Z" level=warning msg="[SETUP] User loadtest_1@trackyo.test setup failed: 404 Not Found\n" source=console
-time="2026-10-04T09:00:05Z" level=warning msg="[SETUP] User loadtest_2@trackyo.test setup failed: 404 Not Found\n" source=console
-time="2026-10-04T09:00:05Z" level=warning msg="[SETUP] User loadtest_3@trackyo.test setup failed: 404 Not Found\n" source=console
-time="2026-10-04T09:00:05Z" level=warning msg="[SETUP] User loadtest_4@trackyo.test setup failed: 404 Not Found\n" source=console
-time="2026-10-04T09:00:05Z" level=warning msg="[SETUP] User loadtest_5@trackyo.test setup failed: 404 Not Found\n" source=console
-time="2026-10-04T09:00:05Z" level=warning msg="[SETUP] User loadtest_6@trackyo.test setup failed: 404 Not Found\n" source=console
-time="2026-10-04T09:00:05Z" level=warning msg="[SETUP] User loadtest_7@trackyo.test setup failed: 404 Not Found\n" source=console
-time="2026-10-04T09:00:05Z" level=warning msg="[SETUP] User loadtest_8@trackyo.test setup failed: 404 Not Found\n" source=console
+time="2026-10-11T09:30:43Z" level=info msg="[SETUP] Registering 10 load test users at https://trackyo-api.onrender.com" source=console
+time="2026-10-11T09:30:43Z" level=warning msg="[SETUP] User loadtest_0@trackyo.test setup failed: 404 Not Found\n" source=console
+time="2026-10-11T09:30:43Z" level=warning msg="[SETUP] User loadtest_1@trackyo.test setup failed: 404 Not Found\n" source=console
+time="2026-10-11T09:30:43Z" level=warning msg="[SETUP] User loadtest_2@trackyo.test setup failed: 404 Not Found\n" source=console
+time="2026-10-11T09:30:43Z" level=warning msg="[SETUP] User loadtest_3@trackyo.test setup failed: 404 Not Found\n" source=console
+time="2026-10-11T09:30:43Z" level=warning msg="[SETUP] User loadtest_4@trackyo.test setup failed: 404 Not Found\n" source=console
+time="2026-10-11T09:30:43Z" level=warning msg="[SETUP] User loadtest_5@trackyo.test setup failed: 404 Not Found\n" source=console
+time="2026-10-11T09:30:44Z" level=warning msg="[SETUP] User loadtest_6@trackyo.test setup failed: 404 Not Found\n" source=console
+time="2026-10-11T09:30:44Z" level=warning msg="[SETUP] User loadtest_7@trackyo.test setup failed: 404 Not Found\n" source=console
+time="2026-10-11T09:30:44Z" level=warning msg="[SETUP] User loadtest_8@trackyo.test setup failed: 404 Not Found\n" source=console
+time="2026-10-11T09:30:44Z" level=warning msg="[SETUP] User loadtest_9@trackyo.test setup failed: 404 Not Found\n" source=console
 
-Run       [ 100% ] setup()
-default   [   0% ]
-time="2026-10-04T09:00:05Z" level=warning msg="[SETUP] User loadtest_9@trackyo.test setup failed: 404 Not Found\n" source=console
+running (0m01.0s), 100/100 VUs, 0 complete and 0 interrupted iterations
+default   [   0% ] 100 VUs  0m00.0s/1m0s
 
 running (0m02.0s), 100/100 VUs, 0 complete and 0 interrupted iterations
 default   [   2% ] 100 VUs  0m01.0s/1m0s
@@ -45,7 +45,7 @@ default   [   2% ] 100 VUs  0m01.0s/1m0s
 running (0m03.0s), 100/100 VUs, 100 complete and 0 interrupted iterations
 default   [   3% ] 100 VUs  0m02.0s/1m0s
 
-running (0m04.0s), 100/100 VUs, 100 complete and 0 interrupted iterations
+running (0m04.0s), 100/100 VUs, 109 complete and 0 interrupted iterations
 default   [   5% ] 100 VUs  0m03.0s/1m0s
 
 running (0m05.0s), 100/100 VUs, 200 complete and 0 interrupted iterations
@@ -54,7 +54,7 @@ default   [   7% ] 100 VUs  0m04.0s/1m0s
 running (0m06.0s), 100/100 VUs, 300 complete and 0 interrupted iterations
 default   [   8% ] 100 VUs  0m05.0s/1m0s
 
-running (0m07.0s), 100/100 VUs, 305 complete and 0 interrupted iterations
+running (0m07.0s), 100/100 VUs, 336 complete and 0 interrupted iterations
 default   [  10% ] 100 VUs  0m06.0s/1m0s
 
 running (0m08.0s), 100/100 VUs, 400 complete and 0 interrupted iterations
@@ -63,7 +63,7 @@ default   [  12% ] 100 VUs  0m07.0s/1m0s
 running (0m09.0s), 100/100 VUs, 500 complete and 0 interrupted iterations
 default   [  13% ] 100 VUs  0m08.0s/1m0s
 
-running (0m10.0s), 100/100 VUs, 533 complete and 0 interrupted iterations
+running (0m10.0s), 100/100 VUs, 581 complete and 0 interrupted iterations
 default   [  15% ] 100 VUs  0m09.0s/1m0s
 
 running (0m11.0s), 100/100 VUs, 600 complete and 0 interrupted iterations
@@ -72,7 +72,7 @@ default   [  17% ] 100 VUs  0m10.0s/1m0s
 running (0m12.0s), 100/100 VUs, 700 complete and 0 interrupted iterations
 default   [  18% ] 100 VUs  0m11.0s/1m0s
 
-running (0m13.0s), 100/100 VUs, 751 complete and 0 interrupted iterations
+running (0m13.0s), 100/100 VUs, 798 complete and 0 interrupted iterations
 default   [  20% ] 100 VUs  0m12.0s/1m0s
 
 running (0m14.0s), 100/100 VUs, 800 complete and 0 interrupted iterations
@@ -81,7 +81,7 @@ default   [  22% ] 100 VUs  0m13.0s/1m0s
 running (0m15.0s), 100/100 VUs, 900 complete and 0 interrupted iterations
 default   [  23% ] 100 VUs  0m14.0s/1m0s
 
-running (0m16.0s), 100/100 VUs, 967 complete and 0 interrupted iterations
+running (0m16.0s), 100/100 VUs, 1000 complete and 0 interrupted iterations
 default   [  25% ] 100 VUs  0m15.0s/1m0s
 
 running (0m17.0s), 100/100 VUs, 1000 complete and 0 interrupted iterations
@@ -90,7 +90,7 @@ default   [  27% ] 100 VUs  0m16.0s/1m0s
 running (0m18.0s), 100/100 VUs, 1100 complete and 0 interrupted iterations
 default   [  28% ] 100 VUs  0m17.0s/1m0s
 
-running (0m19.0s), 100/100 VUs, 1176 complete and 0 interrupted iterations
+running (0m19.0s), 100/100 VUs, 1200 complete and 0 interrupted iterations
 default   [  30% ] 100 VUs  0m18.0s/1m0s
 
 running (0m20.0s), 100/100 VUs, 1200 complete and 0 interrupted iterations
@@ -99,7 +99,7 @@ default   [  32% ] 100 VUs  0m19.0s/1m0s
 running (0m21.0s), 100/100 VUs, 1300 complete and 0 interrupted iterations
 default   [  33% ] 100 VUs  0m20.0s/1m0s
 
-running (0m22.0s), 100/100 VUs, 1388 complete and 0 interrupted iterations
+running (0m22.0s), 100/100 VUs, 1400 complete and 0 interrupted iterations
 default   [  35% ] 100 VUs  0m21.0s/1m0s
 
 running (0m23.0s), 100/100 VUs, 1400 complete and 0 interrupted iterations
@@ -108,10 +108,10 @@ default   [  37% ] 100 VUs  0m22.0s/1m0s
 running (0m24.0s), 100/100 VUs, 1500 complete and 0 interrupted iterations
 default   [  38% ] 100 VUs  0m23.0s/1m0s
 
-running (0m25.0s), 100/100 VUs, 1598 complete and 0 interrupted iterations
+running (0m25.0s), 100/100 VUs, 1600 complete and 0 interrupted iterations
 default   [  40% ] 100 VUs  0m24.0s/1m0s
 
-running (0m26.0s), 100/100 VUs, 1600 complete and 0 interrupted iterations
+running (0m26.0s), 100/100 VUs, 1605 complete and 0 interrupted iterations
 default   [  42% ] 100 VUs  0m25.0s/1m0s
 
 running (0m27.0s), 100/100 VUs, 1700 complete and 0 interrupted iterations
@@ -120,7 +120,7 @@ default   [  43% ] 100 VUs  0m26.0s/1m0s
 running (0m28.0s), 100/100 VUs, 1800 complete and 0 interrupted iterations
 default   [  45% ] 100 VUs  0m27.0s/1m0s
 
-running (0m29.0s), 100/100 VUs, 1800 complete and 0 interrupted iterations
+running (0m29.0s), 100/100 VUs, 1821 complete and 0 interrupted iterations
 default   [  47% ] 100 VUs  0m28.0s/1m0s
 
 running (0m30.0s), 100/100 VUs, 1900 complete and 0 interrupted iterations
@@ -129,7 +129,7 @@ default   [  48% ] 100 VUs  0m29.0s/1m0s
 running (0m31.0s), 100/100 VUs, 2000 complete and 0 interrupted iterations
 default   [  50% ] 100 VUs  0m30.0s/1m0s
 
-running (0m32.0s), 100/100 VUs, 2000 complete and 0 interrupted iterations
+running (0m32.0s), 100/100 VUs, 2047 complete and 0 interrupted iterations
 default   [  52% ] 100 VUs  0m31.0s/1m0s
 
 running (0m33.0s), 100/100 VUs, 2100 complete and 0 interrupted iterations
@@ -138,7 +138,7 @@ default   [  53% ] 100 VUs  0m32.0s/1m0s
 running (0m34.0s), 100/100 VUs, 2200 complete and 0 interrupted iterations
 default   [  55% ] 100 VUs  0m33.0s/1m0s
 
-running (0m35.0s), 100/100 VUs, 2201 complete and 0 interrupted iterations
+running (0m35.0s), 100/100 VUs, 2274 complete and 0 interrupted iterations
 default   [  57% ] 100 VUs  0m34.0s/1m0s
 
 running (0m36.0s), 100/100 VUs, 2300 complete and 0 interrupted iterations
@@ -147,7 +147,7 @@ default   [  58% ] 100 VUs  0m35.0s/1m0s
 running (0m37.0s), 100/100 VUs, 2400 complete and 0 interrupted iterations
 default   [  60% ] 100 VUs  0m36.0s/1m0s
 
-running (0m38.0s), 100/100 VUs, 2403 complete and 0 interrupted iterations
+running (0m38.0s), 100/100 VUs, 2486 complete and 0 interrupted iterations
 default   [  62% ] 100 VUs  0m37.0s/1m0s
 
 running (0m39.0s), 100/100 VUs, 2500 complete and 0 interrupted iterations
@@ -156,7 +156,7 @@ default   [  63% ] 100 VUs  0m38.0s/1m0s
 running (0m40.0s), 100/100 VUs, 2600 complete and 0 interrupted iterations
 default   [  65% ] 100 VUs  0m39.0s/1m0s
 
-running (0m41.0s), 100/100 VUs, 2610 complete and 0 interrupted iterations
+running (0m41.0s), 100/100 VUs, 2692 complete and 0 interrupted iterations
 default   [  67% ] 100 VUs  0m40.0s/1m0s
 
 running (0m42.0s), 100/100 VUs, 2700 complete and 0 interrupted iterations
@@ -165,81 +165,78 @@ default   [  68% ] 100 VUs  0m41.0s/1m0s
 running (0m43.0s), 100/100 VUs, 2800 complete and 0 interrupted iterations
 default   [  70% ] 100 VUs  0m42.0s/1m0s
 
-running (0m44.0s), 100/100 VUs, 2842 complete and 0 interrupted iterations
+running (0m44.0s), 100/100 VUs, 2896 complete and 0 interrupted iterations
 default   [  72% ] 100 VUs  0m43.0s/1m0s
 
-running (0m45.0s), 100/100 VUs, 2900 complete and 0 interrupted iterations
+running (0m45.0s), 100/100 VUs, 2903 complete and 0 interrupted iterations
 default   [  73% ] 100 VUs  0m44.0s/1m0s
 
 running (0m46.0s), 100/100 VUs, 3000 complete and 0 interrupted iterations
 default   [  75% ] 100 VUs  0m45.0s/1m0s
 
-running (0m47.0s), 100/100 VUs, 3058 complete and 0 interrupted iterations
+running (0m47.0s), 100/100 VUs, 3098 complete and 0 interrupted iterations
 default   [  77% ] 100 VUs  0m46.0s/1m0s
 
-running (0m48.0s), 100/100 VUs, 3100 complete and 0 interrupted iterations
+running (0m48.0s), 100/100 VUs, 3112 complete and 0 interrupted iterations
 default   [  78% ] 100 VUs  0m47.0s/1m0s
 
 running (0m49.0s), 100/100 VUs, 3200 complete and 0 interrupted iterations
 default   [  80% ] 100 VUs  0m48.0s/1m0s
 
-running (0m50.0s), 100/100 VUs, 3263 complete and 0 interrupted iterations
+running (0m50.0s), 100/100 VUs, 3299 complete and 0 interrupted iterations
 default   [  82% ] 100 VUs  0m49.0s/1m0s
 
-running (0m51.0s), 100/100 VUs, 3300 complete and 0 interrupted iterations
+running (0m51.0s), 100/100 VUs, 3324 complete and 0 interrupted iterations
 default   [  83% ] 100 VUs  0m50.0s/1m0s
 
 running (0m52.0s), 100/100 VUs, 3400 complete and 0 interrupted iterations
 default   [  85% ] 100 VUs  0m51.0s/1m0s
 
-running (0m53.0s), 100/100 VUs, 3483 complete and 0 interrupted iterations
+running (0m53.0s), 100/100 VUs, 3500 complete and 0 interrupted iterations
 default   [  87% ] 100 VUs  0m52.0s/1m0s
 
-running (0m54.0s), 100/100 VUs, 3500 complete and 0 interrupted iterations
+running (0m54.0s), 100/100 VUs, 3537 complete and 0 interrupted iterations
 default   [  88% ] 100 VUs  0m53.0s/1m0s
 
 running (0m55.0s), 100/100 VUs, 3600 complete and 0 interrupted iterations
 default   [  90% ] 100 VUs  0m54.0s/1m0s
 
-running (0m56.0s), 100/100 VUs, 3690 complete and 0 interrupted iterations
+running (0m56.0s), 100/100 VUs, 3700 complete and 0 interrupted iterations
 default   [  92% ] 100 VUs  0m55.0s/1m0s
 
-running (0m57.0s), 100/100 VUs, 3700 complete and 0 interrupted iterations
+running (0m57.0s), 100/100 VUs, 3756 complete and 0 interrupted iterations
 default   [  93% ] 100 VUs  0m56.0s/1m0s
 
 running (0m58.0s), 100/100 VUs, 3800 complete and 0 interrupted iterations
 default   [  95% ] 100 VUs  0m57.0s/1m0s
 
-running (0m59.0s), 100/100 VUs, 3894 complete and 0 interrupted iterations
+running (0m59.0s), 100/100 VUs, 3900 complete and 0 interrupted iterations
 default   [  97% ] 100 VUs  0m58.0s/1m0s
 
-running (1m00.0s), 100/100 VUs, 3900 complete and 0 interrupted iterations
+running (1m00.0s), 100/100 VUs, 3972 complete and 0 interrupted iterations
 default   [  98% ] 100 VUs  0m59.0s/1m0s
 
-running (1m01.0s), 100/100 VUs, 4000 complete and 0 interrupted iterations
-default   [ 100% ] 100 VUs  1m00.0s/1m0s
-
-running (1m02.0s), 003/100 VUs, 4097 complete and 0 interrupted iterations
+running (1m01.0s), 099/100 VUs, 4001 complete and 0 interrupted iterations
 default ↓ [ 100% ] 100 VUs  1m0s
-time="2026-10-04T09:01:06Z" level=info msg="[TEARDOWN] Load test completed." source=console
-time="2026-10-04T09:01:06Z" level=info msg="[TEARDOWN] Total login successes: login_success_total" source=console
-time="2026-10-04T09:01:06Z" level=info msg="[TEARDOWN] Total expenses created: expense_created_total" source=console
+time="2026-10-11T09:31:45Z" level=info msg="[TEARDOWN] Load test completed." source=console
+time="2026-10-11T09:31:45Z" level=info msg="[TEARDOWN] Total login successes: login_success_total" source=console
+time="2026-10-11T09:31:45Z" level=info msg="[TEARDOWN] Total expenses created: expense_created_total" source=console
 
  ===== Trackyo Load Test Summary =====
  Duration: 1 min @ 100 VUs (+ ramp scenario)
 
  HTTP Requests:
    Total:      4110
-   Rate:       66.23/s
-   Avg:        78ms
-   p95:        87ms
-   Max:        234ms
+   Rate:       66.54/s
+   Avg:        70ms
+   p95:        79ms
+   Max:        215ms
    Error Rate: 100.00%
 
  Thresholds:
  ======================================
 
-running (1m02.1s), 000/100 VUs, 4100 complete and 0 interrupted iterations
+running (1m01.8s), 000/100 VUs, 4100 complete and 0 interrupted iterations
 default ✓ [ 100% ] 100 VUs  1m0s
-time="2026-10-04T09:01:06Z" level=error msg="thresholds on metrics 'errors, http_req_failed' have been crossed"
+time="2026-10-11T09:31:45Z" level=error msg="thresholds on metrics 'errors, http_req_failed' have been crossed"
 ```
